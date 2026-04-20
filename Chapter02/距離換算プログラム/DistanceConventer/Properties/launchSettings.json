@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DistanceConventer": {
+      "commandName": "Project",
+      "commandLineArgs": "-tof"
+    }
+  }
+}
