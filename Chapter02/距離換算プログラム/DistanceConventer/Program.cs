@@ -7,11 +7,11 @@ namespace DistanceConventer
         {
             if (args.Length >= 1 && args[0] == "-tom")
             {
-                PrintFeetToMeterList(1, 10); //-tom メートルへの変換
+                PrintFeetToMeterList(int.Parse(args[1]), int.Parse(args[2])); //-tom メートルへの変換
             }
             else if (args.Length >= 1 && args[00] == "-tof")
             {
-                PrintMeterToFeetList(1, 10); //-tof フィートへの変換
+                PrintMeterToFeetList(int.Parse(args[1]), int.Parse(args[2])); //-tof フィートへの変換
             }
             else
             {
