@@ -2,7 +2,7 @@
   "profiles": {
     "DistanceConventer": {
       "commandName": "Project",
-      "commandLineArgs": "-tom 10 30"
+      "commandLineArgs": "-tom 5 15"
     }
   }
 }
