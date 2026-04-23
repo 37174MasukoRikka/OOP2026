@@ -8,16 +8,18 @@ namespace DistanceConventer
 {
     public static class FeetConverter
     {
+        private static readonly double ratio = 0.3048;  //定数
+
         //メートルからフィートを求める
         public static double FromMeter(double meter)
         {
-            return meter * 0.3048;
+            return meter / ratio;
         }
 
         //フィートからメートルを求める
         public static double ToMeter(double feet)
         {
-            return feet * 0.3048;
+            return feet * ratio;
         }
 
     }
