@@ -24,8 +24,6 @@ namespace Exercise01 {
                 string? artistname = Console.ReadLine();
                 Console.Write("演奏時間（秒）：");
                 int length = int.Parse(Console.ReadLine());
-                //int length = Console.Read();
-                //Console.ReadLine(); //バッファクリア
                 Song song = new Song(title, artistname, length);
 
                 songs.Add(song);
