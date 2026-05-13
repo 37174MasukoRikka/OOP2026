@@ -17,7 +17,7 @@ namespace Exercise01 {
             while (true) {
                 Console.Write("曲名：");
                 string? title = Console.ReadLine();
-                if (title == "end" || title == "End") {
+                if (title.Equals("end",StringComparison.OrdinalIgnoreCase)) {
                     break;
                 }
                 Console.Write("アーティスト名：");
