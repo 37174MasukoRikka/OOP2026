@@ -16,10 +16,12 @@ namespace Exercise01 {
             Console.WriteLine("-----");
 
             // 3.1.3
+            Console.WriteLine("---3.1.3---");
             Exercise3(numbers);
             Console.WriteLine("-----");
 
             // 3.1.4
+            Console.WriteLine("---3.1.4---");
             Exercise4(numbers);
         }
 
@@ -37,11 +39,17 @@ namespace Exercise01 {
         }
 
         private static void Exercise3(List<int> numbers) {
-
+            IEnumerable<int> query = numbers.Where(n => 50 <= n);
+            foreach (var item in query) {
+                Console.WriteLine(item);
+            }
         }
 
         private static void Exercise4(List<int> numbers) {
-
+            var query = numbers.Select(n => n * 2).ToList();
+            foreach (var item in query) {
+                Console.WriteLine(item);
+            }
         }
     }
 }
