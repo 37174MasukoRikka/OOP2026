@@ -27,24 +27,22 @@ namespace Exercise02 {
 
         private static void Exercise2_1(List<string> cities) {
             //できたらGitのコメント「問題3.2.1完成」
-            Console.WriteLine("都市名を入力。");
+            Console.WriteLine("都市名を入力。空白で終了。");
             var name = Console.ReadLine();
-            int index = cities.FindIndex(s => s == name);
-            if(index >= 0) {
+            int index = cities.FindIndex(s => s.Equals(name));
                 Console.WriteLine(index);
-            } else {
-                Console.WriteLine(-1);
-            }
+           
         }
 
         private static void Exercise2_2(List<string> cities) {
-	        //できたらGitのコメント「問題3.2.2完成」
-	        
+            //できたらGitのコメント「問題3.2.2完成」
+            var cnt = cities.Count(s => s.Contains('T'));
+            Console.WriteLine(cnt);
         }
 
         private static void Exercise2_3(List<string> cities) {
 	        //できたらGitのコメント「問題3.2.3完成」
-	        
+	    
         }
 
         private static void Exercise2_4(List<string> cities) {
