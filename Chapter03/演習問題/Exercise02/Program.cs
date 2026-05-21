@@ -22,7 +22,7 @@ namespace Exercise02 {
             Console.WriteLine("***** 3.2.4 *****");
             Exercise2_4(cities);
             Console.WriteLine();
-            
+
         }
 
         private static void Exercise2_1(List<string> cities) {
@@ -30,24 +30,28 @@ namespace Exercise02 {
             Console.WriteLine("都市名を入力。空白で終了。");
             var name = Console.ReadLine();
             int index = cities.FindIndex(s => s.Equals(name));
-                Console.WriteLine(index);
-           
+            Console.WriteLine(index);
+
         }
 
         private static void Exercise2_2(List<string> cities) {
             //できたらGitのコメント「問題3.2.2完成」
-            var cnt = cities.Count(s => s.Contains('T'));
+            var cnt = cities.Count(s => s.Contains('o'));
             Console.WriteLine(cnt);
         }
 
         private static void Exercise2_3(List<string> cities) {
-	        //できたらGitのコメント「問題3.2.3完成」
-	    
+            //できたらGitのコメント「問題3.2.3完成」
+            var selected = cities.Where(s => s.Contains('o')).ToArray();
+            foreach (var name in selected) {
+                Console.WriteLine(name);
+            }
+
         }
 
         private static void Exercise2_4(List<string> cities) {
-	        //できたらGitのコメント「問題3.2.4完成」
-	        
+            //できたらGitのコメント「問題3.2.4完成」
+
         }
     }
 }

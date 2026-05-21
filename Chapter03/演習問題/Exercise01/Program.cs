@@ -47,10 +47,11 @@ namespace Exercise01 {
         }
 
         private static void Exercise4(List<int> numbers) {
-            var query = numbers.Select(n => n * 2).ToList();
-            foreach (var item in query) {
-                Console.WriteLine(item);
-            }
+            numbers.Select(n => n * 2).ToList().ForEach(n => Console.WriteLine(n));
+            //var query = numbers.Select(n => n * 2).ToList();
+            //foreach (var item in query) {
+                //Console.WriteLine(item);
+            //}
         }
     }
 }
