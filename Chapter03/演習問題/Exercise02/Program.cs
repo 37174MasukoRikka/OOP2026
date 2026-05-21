@@ -22,11 +22,19 @@ namespace Exercise02 {
             Console.WriteLine("***** 3.2.4 *****");
             Exercise2_4(cities);
             Console.WriteLine();
+            
         }
 
         private static void Exercise2_1(List<string> cities) {
-	        //できたらGitのコメント「問題3.2.1完成」
-	        
+            //できたらGitのコメント「問題3.2.1完成」
+            Console.WriteLine("都市名を入力。");
+            var name = Console.ReadLine();
+            int index = cities.FindIndex(s => s == name);
+            if(index >= 0) {
+                Console.WriteLine(index);
+            } else {
+                Console.WriteLine(-1);
+            }
         }
 
         private static void Exercise2_2(List<string> cities) {
