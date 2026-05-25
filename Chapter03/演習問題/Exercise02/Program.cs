@@ -28,7 +28,7 @@ namespace Exercise02 {
         private static void Exercise2_1(List<string> cities) {
             //できたらGitのコメント「問題3.2.1完成」
             Console.WriteLine("都市名を入力。空白で終了。");
-            var name = Console.ReadLine();
+            var name = Console.ReadLine();  //入力処理
             int index = cities.FindIndex(s => s.Equals(name));
             Console.WriteLine(index);
 
@@ -46,12 +46,14 @@ namespace Exercise02 {
             foreach (var name in selected) {
                 Console.WriteLine(name);
             }
-
         }
 
         private static void Exercise2_4(List<string> cities) {
             //できたらGitのコメント「問題3.2.4完成」
-
+            var obj = cities.Where(s => s.StartsWith("B")).Select(s => s.Length);
+            foreach (var item in obj) {
+                Console.WriteLine(item);
+            }
         }
     }
 }
