@@ -1,4 +1,6 @@
 ﻿
+using System.Threading.Channels;
+
 namespace Exercise01 {
     internal class Program {
         static void Main(string[] args) {
@@ -19,37 +21,43 @@ namespace Exercise01 {
 
             //foreach文
             Console.WriteLine("foreach文で出力");
-            var name = langs.FindAll(s => s.Contains('S'));
-            foreach (var item in name) {
-                Console.WriteLine(item);
-            }
 
+            foreach (var lang in langs) {
+                if (lang.Contains('S'))
+                    Console.WriteLine(lang);
+
+            }
 
             //for文
             Console.WriteLine("\nfor文で出力");
-
-            var x = langs.Where(s => s.Contains('S')).ToArray();
-            for (int i = 0; i < x.Length; i++) {
-                Console.WriteLine(x[i]);
+            for (int i = 0; i < langs.Count; i++) {
+                if (langs[i].Contains('S'))
+                    Console.WriteLine(langs[i]);
             }
-
 
             //while文
             Console.WriteLine("\nwhile文で出力");
-            //var y = langs.Where(s => s.Contains('S')).ToArray();
-            //while (true) {
-               // Console.WriteLine(y);
-
-            //}
+            int count = 0;
+            while (count < langs.Count) {
+                if (langs[count].Contains('S'))
+                    Console.WriteLine(langs[count]);
+                count++;
+            }
         }
 
         private static void Exercise2(List<string> langs) {
+            Console.WriteLine("\n---4.1.2---");
             //LINQを使用する(Where)
-
+            var selected = langs.Where(s => s.Contains('S'));
+            foreach (var lang in selected) {
+                Console.WriteLine(lang);
+            }
         }
 
         private static void Exercise3(List<string> langs) {
-
+            var name = langs.Find(s => s.Length == 10);
+            var message = name ??= "unknown";
+            Console.WriteLine(message);
         }
     }
 }
