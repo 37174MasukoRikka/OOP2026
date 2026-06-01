@@ -18,14 +18,17 @@ namespace Exercise01 {
         public bool Is21Century => 2001 <= Year && Year <= 2100;
 
         //5.1.3
-        //public YearMonth AddOneMonth(int month) {
-        //   if (1 <= month && month <= 11) {
-        //      return (month + 1);
-    }
+        public YearMonth AddOneMonth() {
+            if (Month == 12) {
+                var y1 = new YearMonth(Year + 1, 1);
+                return y1;
+            } else {
+                var y2 = new YearMonth(Year, Month + 1);
+                return y2;
+            }
+        }
 
+        //5.1.4
+        //public override string ToString() =>
+ }
 }
-
-//5.1.4
-//public override string ToString() =>
-// }
-//}
