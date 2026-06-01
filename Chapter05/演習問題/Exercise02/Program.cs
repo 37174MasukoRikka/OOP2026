@@ -24,7 +24,9 @@ namespace Exercise02 {
         }
 
         private static void Exercise2(YearMonth[] ymCollection) {
-            
+            foreach (var item in ymCollection) {
+                Console.WriteLine(item);
+            }
         }
 
         private static void Exercise4(YearMonth[] ymCollection) {
