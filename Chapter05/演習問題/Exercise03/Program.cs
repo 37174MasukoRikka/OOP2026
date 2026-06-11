@@ -9,6 +9,7 @@ namespace Exercise03 {
                 Console.WriteLine("等しい");
             else
                 Console.WriteLine("等しくない");
+
         }
     }
 }
