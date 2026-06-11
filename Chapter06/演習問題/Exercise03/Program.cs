@@ -61,6 +61,7 @@
             //}
         }
 
+
         //アルファベットの数をカウントして表示
         private static void Exercise6(string text) {
             var str = text.ToLower().Replace(" ", "");
@@ -84,14 +85,16 @@
             for (char ch = 'a'; ch <= 'Z'; ch++) {
                 Console.WriteLine($"{ch}:{array[ch - 'a']}");
             }
+
+            Console.WriteLine(); //改行
+
             //'a'から順にカウントして集計
-            for(char ch = 'a'; ch <= 'z'; ch++) {
-                Console.WriteLine();
+            for (char ch = 'a'; ch <= 'z'; ch++) {
+                Console.WriteLine($"{ch}:{str.Count(c => c == ch)}");
             }
         }
-
     }
 }
 
 
-           
+
