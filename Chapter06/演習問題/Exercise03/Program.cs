@@ -1,4 +1,6 @@
-﻿namespace Exercise03 {
+﻿using System.Text;
+
+namespace Exercise03 {
     internal class Program {
         static void Main(string[] args) {
             var text = "Jackdaws love my big sphinx of quartz";
@@ -46,7 +48,21 @@
         }
 
         private static void Exercise3(string text) {
-            //やらなくてよい
+            var array = text.Split(' ');
+            var sb = new StringBuilder(array[0]);
+
+            foreach (var word in array.Skip(1)) {
+                sb.Append(' ');
+                sb.Append(word);
+            }
+
+            //for (int i = 1; i < array.Length; i++) {
+            //sb.Append(' ');
+            //sb.Append(array[i]);               
+            //}
+
+            //末尾はピリオド(.)で終わる
+            Console.WriteLine(sb + ".");
         }
 
         private static void Exercise4(string text) {
