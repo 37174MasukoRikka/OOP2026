@@ -2,16 +2,15 @@
     internal class Program {
         static void Main(string[] args) {
             var line = "Novelist=谷崎潤一郎;BestWork=春琴抄;Born=1886";
-            var words = line.Split(';');
-            foreach (var item in words) {
-                var equal = item.Split('=');
-                Console.WriteLine(ToJapanese(equal[0]) + ":" + equal[1]);
-            }
 
+            foreach (var item in line.Split(';')) {
+                var equal = item.Split('=');
+                Console.WriteLine($"{ToJapanese(equal[0])}:{equal[1]}");
+            }
         }
         static string ToJapanese(string key) {
             return key switch {
-                "Novelist" => "作家",
+                "Novelist" => "作家の名前",
                 "BestWork" => "代表作",
                 "Born" => "誕生年",
                 _ => "引数keyは、正しい値ではありません"
