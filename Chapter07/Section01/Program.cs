@@ -22,8 +22,6 @@
             foreach (var book in data) {
                 Console.WriteLine(book.Title);
             }
-
-
         }
     }
 }
