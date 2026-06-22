@@ -56,11 +56,14 @@ namespace Exercise02 {
         }
 
         private static void Exercise4(List<Book> books) {
-
+            var book = books.FirstOrDefault(b => b.Price >= 4000);
+            if(book is not null)
+                Console.WriteLine(book.Title);
         }
 
         private static void Exercise5(List<Book> books) {
-
+            var maxPages = books.Where(b => b.Price <= 4000).Max(b => b.Pages);
+            Console.WriteLine(maxPages);
         }
 
         private static void Exercise6(List<Book> books) {
