@@ -61,14 +61,18 @@
         //問題１　合計値を表示（式形式で記述せよ）
         //　　　　出力結果【618】
         private static void Exercise01(int[] numbers) {
-
+            var sum = numbers.Sum();
+            Console.WriteLine(sum);
         }
 
 
         //問題２　偶数の最大値を表示（式形式で記述せよ）
         //　　　　出力結果【94】
         private static void Exercise02(int[] numbers) {
-
+            var num = numbers.Where(n => n % 2 == 0);
+            foreach (var item in num) {
+                
+            }
         }
 
 
