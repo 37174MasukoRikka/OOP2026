@@ -23,10 +23,10 @@
                 prefOfficeDict.Add(pref, prefCaptalLocation);
 
             }
-            Console.WriteLine("***メニュー***\n1:一覧表示\n2:検索\n9:終了");
-            var line = Console.ReadLine();
-            int num = int.Parse(line);
-            switch (num) {
+
+            menuDisp();
+
+            switch (menuDisp()) {
                 case 1:
                     foreach (var item in prefOfficeDict) {
                         Console.WriteLine($"{item.Key}の県庁所在地は{item.Value}です。");
@@ -44,5 +44,12 @@
                     break;
             }
         }
+        private static int menuDisp() {
+            Console.WriteLine("***メニュー***\n1:一覧表示\n2:検索\n9:終了");
+            var line = Console.ReadLine();
+            int num = int.Parse(line);
+            return (num);
+        }
+        
     }
 }
