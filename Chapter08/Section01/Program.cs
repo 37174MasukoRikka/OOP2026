@@ -24,32 +24,40 @@
 
             }
 
-            menuDisp();
-
-            switch (menuDisp()) {
-                case 1:
-                    foreach (var item in prefOfficeDict) {
-                        Console.WriteLine($"{item.Key}の県庁所在地は{item.Value}です。");
-                    }
-                    break;
-                case 2:
-                    Console.Write("都道府県");
-                    var key = Console.ReadLine();
-                    if (prefOfficeDict.ContainsKey(key)) {
-                        var location = prefOfficeDict[key];
-                        Console.WriteLine($"{key}の県庁所在地は{location}です");
-                    }
-                    break;
-                case 9:
-                    break;
+            while (true) {
+                switch (menuDisp()) {
+                    case 1:
+                        allDisp();
+                        break;
+                    case 2:
+                        searchPrefCaptalLocation();
+                        break;
+                    case 9:
+                        return;
+                }
             }
         }
+
+
         private static int menuDisp() {
             Console.WriteLine("***メニュー***\n1:一覧表示\n2:検索\n9:終了");
+            Console.Write(">");
             var line = Console.ReadLine();
             int num = int.Parse(line);
             return (num);
         }
-        
+        private static void allDisp() {
+            foreach (var item in prefOfficeDict) {
+                Console.WriteLine($"{item.Key}の県庁所在地は{item.Value}です。");
+            }
+        }
+        private static void searchPrefCaptalLocation() {
+            Console.Write("都道府県:");
+            var key = Console.ReadLine();
+            if (prefOfficeDict.ContainsKey(key)) {
+                var location = prefOfficeDict[key];
+                Console.WriteLine($"{key}の県庁所在地は{location}です。");
+            }
+        }
     }
 }
