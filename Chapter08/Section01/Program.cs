@@ -1,4 +1,6 @@
-﻿namespace Section01 {
+﻿using System.Threading.Channels;
+
+namespace Section01 {
     internal class Program {
         static private Dictionary<string, string> prefOfficeDict = new Dictionary<string, string>();
 
@@ -9,54 +11,76 @@
             Console.WriteLine("県庁所在地の登録【入力終了：Ctrl + 'Z'】");
 
             while (true) {
-                //都道府県入力
+                //①都道府県入力
                 Console.Write("都道府県:");
                 pref = Console.ReadLine();
 
                 if (pref == null) break;   //無限ループを抜ける(Ctrl + Z)
 
-                //県庁所在地入力
+                //②県庁所在地入力
                 Console.Write("県庁所在地:");
                 prefCaptalLocation = Console.ReadLine();
 
-                //県庁所在地登録処理
-                prefOfficeDict.Add(pref, prefCaptalLocation);
+                //既に都道府県が登録されているか？
+                if (prefOfficeDict.ContainsKey(pref)) {
+                    Console.WriteLine("上書きしますか?(Y/N)");
+                    if (Console.ReadLine() == "N") continue;
+                }
 
+                //③県庁所在地登録処理
+                prefOfficeDict[pref] = prefCaptalLocation;
+                Console.WriteLine();　//改行
             }
 
-            while (true) {
+            Boolean endFlag = false;    //終了フラグ(メニューの無限ループを抜ける用)
+            while (!endFlag) {
                 switch (menuDisp()) {
-                    case 1:
+                    case 1: //一覧出力
                         allDisp();
                         break;
-                    case 2:
+                    case 2: //検索処理
                         searchPrefCaptalLocation();
                         break;
-                    case 9:
-                        return;
+                    default:
+                        endFlag = true;
+                        break;
                 }
             }
         }
 
-
+        //メニュー表示
         private static int menuDisp() {
             Console.WriteLine("***メニュー***\n1:一覧表示\n2:検索\n9:終了");
             Console.Write(">");
-            var line = Console.ReadLine();
-            int num = int.Parse(line);
-            return (num);
+            //メニュー番号を入力させて呼び出し元へ返却
+            return int.Parse(Console.ReadLine());
+            //var line = Console.ReadLine();
+            //int num = int.Parse(line);
+            //return (num);
         }
+
+        //一覧表示
         private static void allDisp() {
             foreach (var item in prefOfficeDict) {
                 Console.WriteLine($"{item.Key}の県庁所在地は{item.Value}です。");
             }
         }
+
+        //検索処理
         private static void searchPrefCaptalLocation() {
             Console.Write("都道府県:");
-            var key = Console.ReadLine();
-            if (prefOfficeDict.ContainsKey(key)) {
-                var location = prefOfficeDict[key];
-                Console.WriteLine($"{key}の県庁所在地は{location}です。");
+            var searchPref = Console.ReadLine();
+            var location = prefOfficeDict[searchPref];
+            if (searchPref is null) return;
+            //検索した結果を表示
+            if (prefOfficeDict.ContainsKey(searchPref)) {
+                Console.WriteLine($"{searchPref}の県庁所在地は{location}です。");
+
+            //Console.Write("都道府県:");
+            //var key = Console.ReadLine();
+            //if (prefOfficeDict.ContainsKey(key)) {
+            //var location = prefOfficeDict[key];
+            //Console.WriteLine($"{key}の県庁所在地は{location}です。");
             }
         }
     }
