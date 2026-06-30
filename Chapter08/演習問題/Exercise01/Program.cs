@@ -11,11 +11,22 @@ namespace Exercise01 {
         }
 
         private static void Exercise1(string text) {
+            var dict = new Dictionary<char, int>();
+            var str = text.ToLower().Replace(" ", "");
             
+
+            foreach (var ch in text) {
+                if ('A' <= ch && ch <= 'Z') {
+                    dict[ch]++;
+                } else {
+
+
+                } 
+            }
         }
 
         private static void Exercise2(string text) {
-            
+
         }
     }
 }
