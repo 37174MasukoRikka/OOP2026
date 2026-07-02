@@ -48,6 +48,7 @@ namespace Section01 {
             }
         }
 
+
         //メニュー表示
         private static int menuDisp() {
             Console.WriteLine("***メニュー***\n1:一覧表示\n2:検索\n9:終了");
