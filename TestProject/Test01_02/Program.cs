@@ -60,44 +60,42 @@
 
         //問題１　合計値を表示（式形式で記述せよ）
         //　　　　出力結果【618】
-        private static void Exercise01(int[] numbers) {
-            var sum = numbers.Sum();
-            Console.WriteLine(sum);
-        }
-
+        private static void Exercise01(int[] numbers) => Console.WriteLine(numbers.Sum());
 
         //問題２　偶数の最大値を表示（式形式で記述せよ）
         //　　　　出力結果【94】
-        private static void Exercise02(int[] numbers) {
-            var num = numbers.Where(n => n % 2 == 0);
-            foreach (var item in num) {
-                
-            }
-        }
-
+        private static void Exercise02(int[] numbers) => Console.WriteLine(numbers.Where(n => n % 2 == 0).Max());
 
         //問題３　昇順に並べて表示（遅延実行とする）
         //　　　　出力結果【12 14 17 20 31 35 40 48 53 76 87 91 94】
         private static void Exercise03(int[] numbers) {
-            
+            var num = numbers.Order();
+            foreach (var item in num) {
+                Console.Write(item + " ");
+            }
         }
 
         //問題４　10以上50以下の数字のみを表示（即時実行でも可とする）
         //　　　　出力結果【12 14 20 40 35 31 17 48】
         private static void Exercise04(int[] numbers) {
-            
+            var num = numbers.Where(n => n >= 10 && n <= 50);
+            foreach (var item in num) {
+                Console.Write(item + " ");
+            }
         }
 
         //問題５　Countメソッドを使い、小文字の'n'が含まれている都市名がいくつあるかカウントして結果を表示
         //　　　　出力結果【5】
         private static void Exercise05(List<string> cities) {
-      
-        
-        }
+            var city = cities.Count(s => s.Contains('n'));
+            Console.WriteLine(city);
+            }
+
 
         //問題６　全都市数
         //　　　　出力結果【8】
         private static void Exercise06(List<string> cities) {
+            //var 
         
         }
 
@@ -152,7 +150,11 @@
         //        【London
         //          Berlin】
         private static void Exercise10(List<string> cities) {
-        
+            var six = cities.Where(s => s.Length == 6);
+            foreach (var item in six) {
+                Console.WriteLine(item);
+            }
+
 
         }
     }
