@@ -24,7 +24,10 @@ namespace Section01 {
             TimeSpan diff = today.Date - birth.Date;
             tbOut2.Text = $"¶‚Ü‚ê‚Ä‚©‚ç{diff.Days.ToString()}“ú–Ú‚Å‚·";
 
-            tbOut3.Text = $"¶‚Ü‚ê‚½{birth.Month}Œ{birth.Day}“ú‚Í‘æ{NthWeek(birth)}T‚Ì{birth.ToString("ddd")}—j“ú‚Å‚·";
+            var culture = new CultureInfo("ja-JP");
+            culture.DateTimeFormat.Calendar = new JapaneseCalendar();
+            var dayOfWeek = culture.DateTimeFormat.GetDayName(birth.DayOfWeek);
+            tbOut3.Text = $"¶‚Ü‚ê‚½{birth.Month}Œ{birth.Day}“ú‚Í‘æ{NthWeek(birth)}T‚Ì{dayOfWeek}‚Å‚·";
         }
 
         //”N—î‚ğ‹‚ß‚éƒƒ\ƒbƒh
@@ -41,7 +44,6 @@ namespace Section01 {
             var firstDayOfWeek = (int)(firstDay.DayOfWeek);
             return (date.Day + firstDayOfWeek - 1) / 7 + 1;
         }
-
     }
 }
 
