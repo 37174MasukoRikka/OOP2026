@@ -44,8 +44,14 @@ namespace Section01 {
             var firstDayOfWeek = (int)(firstDay.DayOfWeek);
             return (date.Day + firstDayOfWeek - 1) / 7 + 1;
         }
+
+        //static int NextBirth(DateTime date) {
+           // return
+        
+            //}
+        }
     }
-}
+
 
 
 
