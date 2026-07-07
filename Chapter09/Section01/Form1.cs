@@ -24,7 +24,7 @@ namespace Section01 {
             TimeSpan diff = today.Date - birth.Date;
             tbOut2.Text = $"生まれてから{diff.Days.ToString()}日目です";
 
-            tbOut3.Text = $"生まれた{birth.Month}月{birth.Day}日は第{NthWeek(birth)}週です";
+            tbOut3.Text = $"生まれた{birth.Month}月{birth.Day}日は第{NthWeek(birth)}週の{birth.ToString("ddd")}曜日です";
         }
 
         //年齢を求めるメソッド
