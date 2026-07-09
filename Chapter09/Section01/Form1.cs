@@ -12,9 +12,9 @@ namespace Section01 {
         }
 
         private void btBirthCalc_Click(object sender, EventArgs e) {
-            DateTime birth = dtpBirth.Value;   //¶‚Ü‚ê‚½“ú•t
+            DateTime birth = dtpBirth.Value.Date;   //¶‚Ü‚ê‚½“ú•t
             DateTime today = DateTime.Today;  //¡“ú‚Ì“ú•t
-            
+
             //int age = today.Year - birth.Year;
             //if(today < birth.AddYears(age)) {
             //    age--;
@@ -28,6 +28,21 @@ namespace Section01 {
             culture.DateTimeFormat.Calendar = new JapaneseCalendar();
             var dayOfWeek = culture.DateTimeFormat.GetDayName(birth.DayOfWeek);
             tbOut3.Text = $"¶‚Ü‚ê‚½{birth.Month}Œ{birth.Day}“ú‚Í‘æ{NthWeek(birth)}T‚Ì{dayOfWeek}‚Å‚·";
+
+            //¡”N‚Ì’a¶“ú‚ğì¬‚·‚é
+            DateTime thisYearBirthday = new DateTime(today.Year, birth.Month, birth.Day);
+            //Šù‚É’a¶“ú‚ª‰ß‚¬‚½‚©
+            if (thisYearBirthday < today) {
+                //—ˆ”N‚Ì’a¶“ú‚ğ”äŠr‚·‚é
+                thisYearBirthday = thisYearBirthday.AddYears(1);
+            }
+            var span = thisYearBirthday - today;
+
+            if (span.Days == 0) {
+                tbOut4.Text = "’a¶“ú‚Í¡“ú‚Å‚·";
+            } else {
+                tbOut4.Text = $"’a¶“ú‚Ü‚Å‚ ‚Æ{span.Days}“ú‚Å‚·";
+            }
         }
 
         //”N—î‚ğ‹‚ß‚éƒƒ\ƒbƒh
@@ -38,19 +53,15 @@ namespace Section01 {
             }
             return age;
         }
-        
+        //w’è‚µ‚½“ú‚ª‘æ‰½T‚©‹‚ß‚é
         static int NthWeek(DateTime date) {
             var firstDay = new DateTime(date.Year, date.Month, 1);
             var firstDayOfWeek = (int)(firstDay.DayOfWeek);
             return (date.Day + firstDayOfWeek - 1) / 7 + 1;
         }
-
-        //static int NextBirth(DateTime date) {
-           // return
-        
-            //}
-        }
     }
+}
+
 
 
 
