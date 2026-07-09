@@ -22,8 +22,6 @@ namespace Exercise01 {
             var dateTime = DateTime.Now;
             var culture = new CultureInfo("ja-JP");
             culture.DateTimeFormat.Calendar = new JapaneseCalendar();
-            var era = culture.DateTimeFormat.Calendar.GetEra(dateTime);
-            var eraName = culture.DateTimeFormat.GetEraName(era);
             
             tbOut3.Text =  dateTime.ToString("gg y”N MŒŽ d“ú(dddd)",culture);
         }
