@@ -59,6 +59,7 @@
             btButton2.TabIndex = 0;
             btButton2.Text = "②";
             btButton2.UseVisualStyleBackColor = true;
+            btButton2.Click += btButton2_Click;
             // 
             // tbOut2
             // 
@@ -77,6 +78,7 @@
             btButton3.TabIndex = 0;
             btButton3.Text = "③";
             btButton3.UseVisualStyleBackColor = true;
+            btButton3.Click += btButton3_Click;
             // 
             // tbOut3
             // 
