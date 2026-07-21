@@ -229,6 +229,8 @@
             // 
             // dgvRecords
             // 
+            dgvRecords.AllowUserToAddRows = false;
+            dgvRecords.AllowUserToDeleteRows = false;
             dgvRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRecords.Location = new Point(108, 397);
             dgvRecords.MultiSelect = false;
@@ -302,6 +304,7 @@
             btDeletePicture.TabIndex = 8;
             btDeletePicture.Text = "削除";
             btDeletePicture.UseVisualStyleBackColor = true;
+            btDeletePicture.Click += btDeletePicture_Click;
             // 
             // btAddRecord
             // 
@@ -327,6 +330,7 @@
             btModifyRecord.TabIndex = 10;
             btModifyRecord.Text = "修正";
             btModifyRecord.UseVisualStyleBackColor = false;
+            btModifyRecord.Click += btModifyRecord_Click;
             // 
             // btDeleteRecord
             // 
@@ -339,6 +343,7 @@
             btDeleteRecord.TabIndex = 11;
             btDeleteRecord.Text = "削除";
             btDeleteRecord.UseVisualStyleBackColor = false;
+            btDeleteRecord.Click += btDeleteRecord_Click;
             // 
             // pbPicture
             // 
@@ -420,6 +425,7 @@
             statusStrip1.Location = new Point(0, 684);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(800, 22);
+            statusStrip1.SizingGrip = false;
             statusStrip1.TabIndex = 14;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -469,9 +475,12 @@
             Controls.Add(label7);
             Controls.Add(label1);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
             Name = "Form1";
             Text = "試乗レポート管理システム";
+            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecords).EndInit();

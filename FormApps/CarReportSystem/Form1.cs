@@ -33,6 +33,10 @@ namespace CarReportSystem {
             };
             listCarReports.Add(carReport);
 
+            //入力履歴を登録
+            SetCbAuthor(cbAuthor.Text);
+            SetCbCarName(cbCarName.Text);
+
             ImputItemsAllClear(); //入力項目の全クリア
         }
 
@@ -72,19 +76,79 @@ namespace CarReportSystem {
         }
 
         private void dgvRecords_Click(object sender, EventArgs e) {
+
+            if (dgvRecords.CurrentRow is null) return;
+
             dtpDate.Value = (DateTime)dgvRecords.CurrentRow.Cells["Date"].Value;
             cbAuthor.Text = (String)dgvRecords.CurrentRow.Cells["Author"].Value;
-
+            SetRaidButtonMaker((MakerGroup)dgvRecords.CurrentRow.Cells["Maker"].Value);
             cbCarName.Text = (String)dgvRecords.CurrentRow.Cells["CarName"].Value;
-            tbReport.Text  = (String)dgvRecords.CurrentRow.Cells["Report"].Value;
+            tbReport.Text = (String)dgvRecords.CurrentRow.Cells["Report"].Value;
             pbPicture.Image = (Image)dgvRecords.CurrentRow.Cells["Picture"].Value;
+
+        }
+        private void SetRaidButtonMaker(MakerGroup targetMaker) {
+
+            switch (targetMaker) {
+                case MakerGroup.トヨタ:
+                    rbToyota.Checked = true;
+                    break;
+                case MakerGroup.日産:
+                    rbNissan.Checked = true;
+                    break;
+                case MakerGroup.ホンダ:
+                    rbHonda.Checked = true;
+                    break;
+                case MakerGroup.スバル:
+                    rbSubaru.Checked = true;
+                    break;
+                case MakerGroup.輸入車:
+                    rbImport.Checked = true;
+                    break;
+                default:
+                    rbOther.Checked = true;
+                    break;
+            }
+        }
+        //記録者の入力履歴をコンボボックスへ登録(重複なし)
+        private void SetCbAuthor(string author) {
+            //未登録なら登録
+            if (!cbAuthor.Items.Contains(author))
+                cbAuthor.Items.Add(author);
+        }
+
+        //車名の入力履歴をコンボボックスへ登録(重複なし)
+        private void SetCbCarName(string carName) {
+            if (!cbCarName.Items.Contains(carName))
+                cbCarName.Items.Add(carName);
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+
+        }
+
+
+
+        private void btDeletePicture_Click(object sender, EventArgs e) {
+            pbPicture.Image = null;
+        }
+
+        private void btDeleteRecord_Click(object sender, EventArgs e) {
+
+            //選択されているインデックスを取得
+            int cul = dgvRecords.CurrentRow.Index;
+
+            //削除したいインデックスを指定してリストから削除
+            listCarReports.RemoveAt(cul);
+
+        }
+
+        private void btModifyRecord_Click(object sender, EventArgs e) {
+
+
+
+            //dgvRecords.Refresh();  //データグリッドビューの更新
 
         }
     }
 }
-
-
-
-
-
-
