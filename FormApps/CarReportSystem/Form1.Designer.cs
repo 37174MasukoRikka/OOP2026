@@ -241,7 +241,6 @@
             dgvRecords.Size = new Size(637, 235);
             dgvRecords.TabIndex = 4;
             dgvRecords.SelectionChanged += dgvRecords_SelectionChanged;
-            dgvRecords.Click += dgvRecords_Click;
             // 
             // tbReport
             // 
