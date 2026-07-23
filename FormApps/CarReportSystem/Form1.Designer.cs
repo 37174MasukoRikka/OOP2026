@@ -51,10 +51,10 @@
             pbPicture = new PictureBox();
             menuStrip1 = new MenuStrip();
             ファイルFToolStripMenuItem = new ToolStripMenuItem();
+            開くToolStripMenuItem = new ToolStripMenuItem();
             保存ToolStripMenuItem = new ToolStripMenuItem();
-            色設定ToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
-            終了ToolStripMenuItem = new ToolStripMenuItem();
+            色設定ToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             終了ToolStripMenuItem1 = new ToolStripMenuItem();
             ヘルプHToolStripMenuItem = new ToolStripMenuItem();
@@ -64,6 +64,7 @@
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             toolStripStatusLabel2 = new ToolStripStatusLabel();
             ofdPicFileOpen = new OpenFileDialog();
+            cdColor = new ColorDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecords).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
@@ -367,33 +368,34 @@
             // 
             // ファイルFToolStripMenuItem
             // 
-            ファイルFToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 保存ToolStripMenuItem, 色設定ToolStripMenuItem, toolStripSeparator3, 終了ToolStripMenuItem, toolStripSeparator1, 終了ToolStripMenuItem1 });
+            ファイルFToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 開くToolStripMenuItem, 保存ToolStripMenuItem, toolStripSeparator3, 色設定ToolStripMenuItem, toolStripSeparator1, 終了ToolStripMenuItem1 });
             ファイルFToolStripMenuItem.Name = "ファイルFToolStripMenuItem";
             ファイルFToolStripMenuItem.Size = new Size(67, 20);
             ファイルFToolStripMenuItem.Text = "ファイル(&F)";
+            // 
+            // 開くToolStripMenuItem
+            // 
+            開くToolStripMenuItem.Name = "開くToolStripMenuItem";
+            開くToolStripMenuItem.Size = new Size(155, 22);
+            開くToolStripMenuItem.Text = "開く...";
             // 
             // 保存ToolStripMenuItem
             // 
             保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
             保存ToolStripMenuItem.Size = new Size(155, 22);
-            保存ToolStripMenuItem.Text = "開く...";
-            // 
-            // 色設定ToolStripMenuItem
-            // 
-            色設定ToolStripMenuItem.Name = "色設定ToolStripMenuItem";
-            色設定ToolStripMenuItem.Size = new Size(155, 22);
-            色設定ToolStripMenuItem.Text = "保存...";
+            保存ToolStripMenuItem.Text = "保存...";
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
             toolStripSeparator3.Size = new Size(152, 6);
             // 
-            // 終了ToolStripMenuItem
+            // 色設定ToolStripMenuItem
             // 
-            終了ToolStripMenuItem.Name = "終了ToolStripMenuItem";
-            終了ToolStripMenuItem.Size = new Size(155, 22);
-            終了ToolStripMenuItem.Text = "色設定...";
+            色設定ToolStripMenuItem.Name = "色設定ToolStripMenuItem";
+            色設定ToolStripMenuItem.Size = new Size(155, 22);
+            色設定ToolStripMenuItem.Text = "色設定...";
+            色設定ToolStripMenuItem.Click += 色設定ToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
@@ -406,6 +408,7 @@
             終了ToolStripMenuItem1.ShortcutKeys = Keys.Alt | Keys.F4;
             終了ToolStripMenuItem1.Size = new Size(155, 22);
             終了ToolStripMenuItem1.Text = "終了(&X)";
+            終了ToolStripMenuItem1.Click += 終了ToolStripMenuItem1_Click;
             // 
             // ヘルプHToolStripMenuItem
             // 
@@ -523,10 +526,10 @@
         private PictureBox pbPicture;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem ファイルFToolStripMenuItem;
+        private ToolStripMenuItem 開くToolStripMenuItem;
         private ToolStripMenuItem 保存ToolStripMenuItem;
-        private ToolStripMenuItem 色設定ToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator3;
-        private ToolStripMenuItem 終了ToolStripMenuItem;
+        private ToolStripMenuItem 色設定ToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem 終了ToolStripMenuItem1;
         private ToolStripMenuItem ヘルプHToolStripMenuItem;
@@ -536,5 +539,6 @@
         private ToolStripStatusLabel toolStripStatusLabel1;
         private ToolStripStatusLabel toolStripStatusLabel2;
         private OpenFileDialog ofdPicFileOpen;
+        private ColorDialog cdColor;
     }
 }

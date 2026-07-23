@@ -1,6 +1,7 @@
 using Microsoft.VisualBasic;
 using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
+using System.Windows.Forms;
 using static CarReportSystem.CarReport;
 
 namespace CarReportSystem {
@@ -177,6 +178,18 @@ namespace CarReportSystem {
             pbPicture.Image = (Image)dgvRecords.CurrentRow.Cells["Picture"].Value;
 
             ImputItemsUpdate();//データグリッドビューを更新したら呼ぶメソッド
+        }
+
+        private void 終了ToolStripMenuItem1_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            cdColor = new ColorDialog();
+            if (cdColor.ShowDialog() == DialogResult.OK) {
+                Color selectedColor = cdColor.Color;
+                BackColor = selectedColor;
+            }
         }
     }
 }
