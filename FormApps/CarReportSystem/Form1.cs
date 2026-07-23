@@ -2,6 +2,8 @@ using Microsoft.VisualBasic;
 using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 using static CarReportSystem.CarReport;
 
 namespace CarReportSystem {
@@ -9,6 +11,9 @@ namespace CarReportSystem {
 
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+
+        //設定クラスのオブジェクトを生成
+        Settings settings = new Settings();
 
         public Form1() {
             InitializeComponent();
@@ -143,7 +148,7 @@ namespace CarReportSystem {
                 return;
             }
 
-            if (String.IsNullOrWhiteSpace(cbAuthor.Text) 
+            if (String.IsNullOrWhiteSpace(cbAuthor.Text)
                 || String.IsNullOrWhiteSpace(cbCarName.Text)) {
                 tsslbMessage.Text = "記録者、または社名が未入力です";
             }
@@ -187,6 +192,17 @@ namespace CarReportSystem {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 Color selectedColor = cdColor.Color;
                 BackColor = selectedColor;
+            }
+        }
+
+        //フォームが閉じたら呼ばれるイベントハンドラ
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            //設定ファイルジェ色情報を保存する処理(シリアル化)
+            //p284以降を参考にする(ファイル名:setting.xml)
+
+            using (var writer = XmlWriter.Create("setting.xml")) {
+                var serializer = new XmlSerializer(settings.GetType());
+                serializer.Serialize(writer, settings);
             }
         }
     }
