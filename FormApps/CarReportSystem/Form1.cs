@@ -19,6 +19,30 @@ namespace CarReportSystem {
             InitializeComponent();
             dgvRecords.DataSource = listCarReports;
         }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            //設定ファイルを読み込み背景色を設定する（逆シリアル化）
+            //P286以降を参考にする（ファイル名:setting.xml)
+
+            //ファイルが存在するか？
+            if (File.Exists("setting.xml")) {
+                try {
+                    using (var reader = XmlReader.Create("setting.xml")) {
+                        var serializer = new XmlSerializer(typeof(Settings));
+                        var settings = serializer.Deserialize(reader) as Settings;
+                        //背景色設定
+                        BackColor = Color.FromArgb(settings.MainFormBackColor);
+                    }
+                }
+                catch (Exception ex) {
+                    tsslbMessage.Text = "設定ファイル読み込みエラー";
+                    MessageBox.Show(ex.Message);//←より具体的なエラーを出力
+                }
+            } else {
+                tsslbMessage.Text = "設定ファイルがありません";
+            }
+        }
+
         //追加ボタンイベントハンドラ
         private void btAddRecord_Click(object sender, EventArgs e) {
 
@@ -188,10 +212,12 @@ namespace CarReportSystem {
         }
 
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
-            cdColor = new ColorDialog();
+            //cdColor = new ColorDialog();
             if (cdColor.ShowDialog() == DialogResult.OK) {
-                Color selectedColor = cdColor.Color;
-                BackColor = selectedColor;
+                //Color selectedColor = cdColor.Color;
+                BackColor = cdColor.Color;
+                //変更された色の情報を保存
+                settings.MainFormBackColor = cdColor.Color.ToArgb();
             }
         }
 
