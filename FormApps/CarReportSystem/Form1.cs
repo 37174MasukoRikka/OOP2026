@@ -1,6 +1,7 @@
 using Microsoft.VisualBasic;
 using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
@@ -14,22 +15,23 @@ namespace CarReportSystem {
 
         //設定クラスのオブジェクトを生成
         Settings settings = new Settings();
+        
 
         public Form1() {
             InitializeComponent();
-            dgvRecords.DataSource = listCarReports;
+            dgvRecords.DataSource = listCarReports; 
         }
 
         private void Form1_Load(object sender, EventArgs e) {
             //設定ファイルを読み込み背景色を設定する（逆シリアル化）
             //P286以降を参考にする（ファイル名:setting.xml)
-
+            
             //ファイルが存在するか？
             if (File.Exists("setting.xml")) {
                 try {
                     using (var reader = XmlReader.Create("setting.xml")) {
                         var serializer = new XmlSerializer(typeof(Settings));
-                        var settings = serializer.Deserialize(reader) as Settings;
+                        settings = serializer.Deserialize(reader) as Settings;
                         //背景色設定
                         BackColor = Color.FromArgb(settings.MainFormBackColor);
                     }
@@ -231,5 +233,32 @@ namespace CarReportSystem {
                 serializer.Serialize(writer, settings);
             }
         }
+
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
+            reportSaveFile();
+        }
+
+        //ファイルサーブ処理
+        private void reportSaveFile() {
+            if (sfdReportFileSave.ShowDialog() == DialogResult.OK) {
+                try {
+                    //バイナリ形式でシリアル化
+#pragma warning disable SYSLIB0011
+                    var bf = new BinaryFormatter();
+#pragma warning restore SYSLIB0011
+                }
+                catch (Exception ex) {
+                    tsslbMessage.Text = "ファイル書き出しエラー";
+                    MessageBox.Show(ex.Message);
+
+                }
+            }
+        }
+
+        //ファイルオープン処理
+        private void reportOpenFile() {
+
+        }
+
     }
 }
