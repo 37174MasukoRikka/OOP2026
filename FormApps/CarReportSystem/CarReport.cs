@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarReportSystem {
-    internal class CarReport {
+    [Serializable]
+    public class CarReport {
         //列挙型
         public enum MakerGroup {
             なし,

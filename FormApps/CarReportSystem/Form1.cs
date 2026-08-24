@@ -15,17 +15,17 @@ namespace CarReportSystem {
 
         //設定クラスのオブジェクトを生成
         Settings settings = new Settings();
-        
+
 
         public Form1() {
             InitializeComponent();
-            dgvRecords.DataSource = listCarReports; 
+            dgvRecords.DataSource = listCarReports;
         }
 
         private void Form1_Load(object sender, EventArgs e) {
             //設定ファイルを読み込み背景色を設定する（逆シリアル化）
             //P286以降を参考にする（ファイル名:setting.xml)
-            
+
             //ファイルが存在するか？
             if (File.Exists("setting.xml")) {
                 try {
@@ -246,6 +246,13 @@ namespace CarReportSystem {
 #pragma warning disable SYSLIB0011
                     var bf = new BinaryFormatter();
 #pragma warning restore SYSLIB0011
+                    using (FileStream fs = File.Open(
+                        sfdReportFileSave.FileName,
+                        FileMode.Create
+                        )) {
+                        bf.Serialize(fs,listCarReports);
+
+                    }
                 }
                 catch (Exception ex) {
                     tsslbMessage.Text = "ファイル書き出しエラー";
