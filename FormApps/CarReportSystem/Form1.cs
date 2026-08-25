@@ -150,15 +150,18 @@ namespace CarReportSystem {
         }
 
         private void btDeleteRecord_Click(object sender, EventArgs e) {
-
             if ((dgvRecords.CurrentRow is null)
                 || (!dgvRecords.CurrentRow.Selected)) return;
 
             //選択されているインデックスを取得
-            //削除したいインデックスを指定してリストから削除
-            listCarReports.RemoveAt(dgvRecords.CurrentRow.Index);
+            //削除したいインデックスを指定してリストから削除           
+            if(dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+                tsslbMessage.Text = "削除するレポートを選択してください";
+                return;
+            }
+            listCarReports.Remove(carReport);
 
-            //InputItemsAllClear();
+            InputItemsUpdate();
         }
 
         //データグリッドビューを更新したら呼ぶメソッド
@@ -180,6 +183,10 @@ namespace CarReportSystem {
                 tsslbMessage.Text = "記録者、または社名が未入力です";
             }
 
+            if (dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+                tsslbMessage.Text = "修正するレポートを選択してください";
+                return;
+            }
             //カーレポート管理用リストの該当する要素のデータを書き換える
             listCarReports[dgvRecords.CurrentRow.Index].Date = dtpDate.Value;
             listCarReports[dgvRecords.CurrentRow.Index].Author = cbAuthor.Text.Trim();
