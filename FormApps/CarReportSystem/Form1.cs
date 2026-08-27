@@ -25,6 +25,7 @@ namespace CarReportSystem {
             //ファイルが存在するか？
             if (File.Exists("setting.xml")) {
                 try {
+
                     using (var reader = XmlReader.Create("setting.xml")) {
                         var serializer = new XmlSerializer(typeof(Settings));
 
@@ -32,7 +33,7 @@ namespace CarReportSystem {
                             settings = loadedSettings;
                             //背景色設定
                             BackColor = Color.FromArgb(Settings.Instance.MainFormBackColor);
-                        }                      
+                        }
                     }
                 }
                 catch (Exception ex) {
@@ -154,7 +155,7 @@ namespace CarReportSystem {
 
             //選択されているインデックスを取得
             //削除したいインデックスを指定してリストから削除           
-            if(dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+            if (dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
                 tsslbMessage.Text = "削除するレポートを選択してください";
                 return;
             }
