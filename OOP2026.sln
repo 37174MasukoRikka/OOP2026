@@ -141,6 +141,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FormApps", "FormApps", "{DC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarReportSystem", "FormApps\CarReportSystem\CarReportSystem.csproj", "{B4C0A58F-7C4C-4CA6-84A5-D2183CD0870D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteProductSample", "FormApps\SQLiteProductSample\SQLiteProductSample.csproj", "{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -307,6 +309,10 @@ Global
 		{B4C0A58F-7C4C-4CA6-84A5-D2183CD0870D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4C0A58F-7C4C-4CA6-84A5-D2183CD0870D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4C0A58F-7C4C-4CA6-84A5-D2183CD0870D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -369,6 +375,7 @@ Global
 		{7FDAD85E-A5D8-474A-BFD9-617B4876AFD6} = {6F349DC5-F7C4-4C14-AF4C-3F84C2E8A397}
 		{13EA441B-E72F-5CA2-D5D4-B3F52139D7CF} = {6F349DC5-F7C4-4C14-AF4C-3F84C2E8A397}
 		{B4C0A58F-7C4C-4CA6-84A5-D2183CD0870D} = {DCAE8641-155E-4179-B0CF-31560507AE5C}
+		{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C} = {DCAE8641-155E-4179-B0CF-31560507AE5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6B92DA2C-CB15-43E0-A50A-D572D9AC5F6C}
