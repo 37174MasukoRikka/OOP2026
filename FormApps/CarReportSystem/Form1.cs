@@ -17,39 +17,48 @@ namespace CarReportSystem {
             InitializeComponent();
             dgvRecords.DataSource = listCarReports;
         }
-      
+
         private void Form1_Load(object sender, EventArgs e) {
             //設定ファイルを読み込み背景色を設定する（逆シリアル化）
             //P286以降を参考にする（ファイル名:setting.xml)
 
+
+            try {
+                Settings.Instance.Load();
+
+                BackColor = Color.FromArgb(Settings.Instance.MainFormBackColor);
+            }
+
             //ファイルが存在するか？
-            if (File.Exists("setting.xml")) {
-                try {
+            //if (File.Exists("setting.xml")) {
+            //    try {
 
-                    using (var reader = XmlReader.Create("setting.xml")) {
-                        var serializer = new XmlSerializer(typeof(Settings));
+            //        using (var reader = XmlReader.Create("setting.xml")) {
+            //            var serializer = new XmlSerializer(typeof(Settings));
 
-                        if (serializer.Deserialize(reader) is Settings loadedSettings) {
-                            settings = loadedSettings;
-                            //背景色設定
-                            BackColor = Color.FromArgb(Settings.Instance.MainFormBackColor);
-                        }
-                    }
-                }
-                catch (Exception ex) {
-                    tsslbMessage.Text = "設定ファイル読み込みエラー";
-                    MessageBox.Show(ex.Message);//←より具体的なエラーを出力
-                }
-            } else {
-                tsslbMessage.Text = "設定ファイルがありません";
+            //            if (serializer.Deserialize(reader) is Settings loadedSettings) {
+            //                settings = loadedSettings;
+            //                //背景色設定
+            //                BackColor = Color.FromArgb(Settings.Instance.MainFormBackColor);
+            //            }
+            //        }
+            //    }
+            catch (Exception ex) {
+                tsslbMessage.Text = "設定ファイル読み込みエラー";
+                MessageBox.Show(ex.Message);//←より具体的なエラーを出力
             }
         }
+        //} else {
+        //        tsslbMessage.Text = "設定ファイルがありません";
+        //    }
+        //}
+
 
         //追加ボタンイベントハンドラ
         private void btAddRecord_Click(object sender, EventArgs e) {
 
             tsslbMessage.Text = String.Empty; //メッセージ領域のクリア
-            //if (String.IsNullOrWhiteSpace(cbAuthor.Text) || String.IsNullOrWhiteSpace(cbCarName.Text))
+                                              //if (String.IsNullOrWhiteSpace(cbAuthor.Text) || String.IsNullOrWhiteSpace(cbCarName.Text))
             if (cbAuthor.Text == String.Empty || cbCarName.Text == String.Empty) {
                 tsslbMessage.Text = "記録者、または社名が未入力です";
                 return;
@@ -236,10 +245,11 @@ namespace CarReportSystem {
             //設定ファイルジェ色情報を保存する処理(シリアル化)
             //p284以降を参考にする(ファイル名:setting.xml)
 
-            using (var writer = XmlWriter.Create("setting.xml")) {
-                var serializer = new XmlSerializer(Settings.Instance.GetType());
-                serializer.Serialize(writer, Settings.Instance);
-            }
+            Settings.Instance.Save();
+            //using (var writer = XmlWriter.Create("setting.xml")) {
+            //    var serializer = new XmlSerializer(Settings.Instance.GetType());
+            //    serializer.Serialize(writer, Settings.Instance);
+            //}
         }
 
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
