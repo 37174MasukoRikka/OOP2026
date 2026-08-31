@@ -12,6 +12,16 @@ public partial class Form1 : Form
     public Form1()
     {
         InitializeComponent();
+
+        //ProductsクラスのプロパティからDataGridView列を自動生成する
+        dgvProducts.AutoGenerateColumns = true;
+        //DataGridViewの元データとしてBindingListを設定する
+        dgvProducts.DataSource = _products;
+        //起動直後にDBから商品一覧を読み込む
+        ReloadProducts();
+
+        //使用中のDBファイルの場所をステータスバーへ表示する
+        tsslMessage.Text = $"DB: {Database.FilePath}";
     }
 
     private void btAdd_Click(object sender, EventArgs e)
@@ -41,7 +51,11 @@ public partial class Form1 : Form
 
     private void ReloadProducts()
     {
-       
+        _products.Clear();
+        foreach (var product in _repository.GetAll()) {
+            _products.Add(product);
+        }
+        dgvProducts.ClearSelection();
     }
 
     private bool TryGetInput(out string name, out int price)
