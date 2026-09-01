@@ -27,6 +27,7 @@ public static class Database {
         //DBを開く
         connection.Open();
 
+        //SQLを実行するためのコマンドオブジェクトを作る
         using var command = connection.CreateCommand();
 
         //Productsテーブルを作るSQL
@@ -39,7 +40,7 @@ public static class Database {
                 Price   INTEGER NOT NULL CHECK (Price >= 0)           
             );
             """;
-        //結果業を返さないSQLを実行する
+        //結果行を返さないSQLを実行する
         command.ExecuteNonQuery();
     }
 }
