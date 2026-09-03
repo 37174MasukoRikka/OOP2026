@@ -87,7 +87,7 @@ public partial class Form1 : Form {
 
             tsslMessage.Text = "商品を削除しました。";
         }
-        catch(Exception ex) {
+        catch (Exception ex) {
             ShowError("削除エラー", ex);
         }
     }
