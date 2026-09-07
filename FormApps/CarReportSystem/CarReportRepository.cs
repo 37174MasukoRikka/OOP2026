@@ -1,9 +1,12 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.Xml.Linq;
+using static CarReportSystem.CarReport;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -11,7 +14,7 @@ namespace CarReportSystem {
     public class CarReportRepository {
         public List<CarReport> GetAll() {
 
-            var carreports = new List<CarReport>();
+            var reports = new List<CarReport>();
             using var connection = Database.GetConnection();
             connection.Open();
 
@@ -28,20 +31,25 @@ namespace CarReportSystem {
             using var reader = command.ExecuteReader();
 
             while (reader.Read()) {
-                carreports.Add(new CarReport {
-                    Id = reader.GetInt32(0),    //0列目:Id
-                    Date = reader.GetDateTime(1), //1列目:Date
-                    Author = reader.GetString(2),  //2列目:Author
-                    Maker = (CarReport.MakerGroup)reader.GetInt32(3), //3列目:Maker
-                    CarName = reader.GetString(4), //4列目:CarName
-                    Report = reader.GetString(5), //5列目:Report
-                    //Picture =          //6列目:Picture
+                reports.Add(new CarReport {
+                    Id = reader.GetInt32(0),    
+                    Date = DateTime.ParseExact(
+                       reader.GetString(1),
+                       "yyyy-mm-dd",
+                       CultureInfo.InvariantCulture),                       
+                    Author = reader.GetString(2),  
+                    Maker = (CarReport.MakerGroup)reader.GetInt32(3), 
+                    CarName = reader.GetString(4), 
+                    Report = reader.GetString(5), 
+                    //Picture = ()reader.GetByte(6)     
+
                 });
             }
-            return carreports;
+            return reports;
         }
+      
 
-        public int Add(string name, int price) {
+        public int Add(DateTime date, string author, MakerGroup maker, string carName, string report, Image? picture) {
             //接続オブジェクトを生成する。
             using var connection = Database.GetConnection();
             //DBを開く
@@ -61,12 +69,12 @@ namespace CarReportSystem {
                      
                 """;
 
-            command.Parameters.AddWithValue("$date", name);
-            command.Parameters.AddWithValue("$author", price);
-            command.Parameters.AddWithValue("$maker", price);
-            command.Parameters.AddWithValue("$carName", price);
-            command.Parameters.AddWithValue("$report", price);
-            command.Parameters.AddWithValue("$picture", price);
+            command.Parameters.AddWithValue("$date", date);
+            command.Parameters.AddWithValue("$author", author);
+            command.Parameters.AddWithValue("$maker", maker);
+            command.Parameters.AddWithValue("$carName", carName);
+            command.Parameters.AddWithValue("$report", report);
+            command.Parameters.AddWithValue("$picture", picture);
 
             //一つの値を返しSQLを実行する
             var result = command.ExecuteScalar();
@@ -77,6 +85,21 @@ namespace CarReportSystem {
             //SQLiteのINTEGERはlongとして返るため、intへ変換する。
             return Convert.ToInt32((long)result);
         }
+        public void Update(CarReport carReport) {
+            //接続オブジェクトを生成する。
+            using var connection = Database.GetConnection();
+            connection.Open();
+            using var command = connection.CreateCommand();
+
+            command.CommandText =
+                """
+                UPDATE CarReports
+                SET Date = $date, Author = $author, Maker = $maker,
+                    CarName = $carName, Report = $report, Picture = $picture
+                WHERE Id = $id;                               
+                """;
+        }
+
 
 
         // ImageをSQLiteへ保存できるbyte[]へ変換する
@@ -98,3 +121,4 @@ namespace CarReportSystem {
         }
     }
 }
+
