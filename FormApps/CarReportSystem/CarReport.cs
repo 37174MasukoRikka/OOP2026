@@ -14,8 +14,8 @@ namespace CarReportSystem {
             その他,
         }
         //商品ID(自動採番)
-        [DisplayName("ID")]
-        public int Id { get; set; }
+        [System.ComponentModel.DisplayName("Id")]
+        public int Id { get; set; } //Id
         [System.ComponentModel.DisplayName("日付")]
         public DateTime Date { get; set; }  //日付
         [System.ComponentModel.DisplayName("記録者")]
