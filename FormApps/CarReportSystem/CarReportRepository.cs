@@ -33,13 +33,12 @@ namespace CarReportSystem {
                     Maker = (CarReport.MakerGroup)reader.GetInt32(3), 
                     CarName = reader.GetString(4), 
                     Report = reader.GetString(5), 
-                    Picture = (System.Drawing.Image)reader.GetValue(6)     
-
+                    Picture = reader.IsDBNull(6) 
+                                  ? null : BytesToImage(reader.GetFieldValue < byte[]>(6))                  
                 });
             }
             return reports;
-        }
-      
+        }      
 
         public int Add(DateTime date, string author, MakerGroup maker, string carName, string report, Image? picture) {
             //接続オブジェクトを生成する。
