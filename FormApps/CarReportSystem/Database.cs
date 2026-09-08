@@ -8,9 +8,10 @@ namespace CarReportSystem {
         private static readonly string ConnectionString =
             $"Data Source={DatabasePath}";
 
+        
         public static SqliteConnection GetConnection()
             => new SqliteConnection(ConnectionString);
-
+        
         public static void Initialize() {
             //接続してCREATE TABLE IF NOT EXISTSを実行
             using var connection = GetConnection();

@@ -1,14 +1,6 @@
-﻿using Microsoft.Data.Sqlite;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Diagnostics.Metrics;
-using System.Drawing.Imaging;
+﻿using System.Drawing.Imaging;
 using System.Globalization;
-using System.Xml.Linq;
 using static CarReportSystem.CarReport;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CarReportSystem {
     public class CarReportRepository {
@@ -41,7 +33,7 @@ namespace CarReportSystem {
                     Maker = (CarReport.MakerGroup)reader.GetInt32(3), 
                     CarName = reader.GetString(4), 
                     Report = reader.GetString(5), 
-                    //Picture = ()reader.GetByte(6)     
+                    Picture = (System.Drawing.Image)reader.GetValue(6)     
 
                 });
             }
@@ -100,7 +92,22 @@ namespace CarReportSystem {
                 """;
         }
 
+        public void Delete(int id) {
+            using var connection = Database.GetConnection();
+            connection.Open();
 
+            using var command = connection.CreateCommand();
+            command.CommandText =
+                """
+                DELETE FROM CarReports
+                WHERE Id = $id;
+
+                """;
+             
+            command.Parameters.AddWithValue("$id", id);
+            command.ExecuteNonQuery();
+        }
+           
 
         // ImageをSQLiteへ保存できるbyte[]へ変換する
         private static byte[]? ImageToBytes(Image? image) {
