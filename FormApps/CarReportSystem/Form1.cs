@@ -1,11 +1,19 @@
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using static CarReportSystem.CarReport;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
+
+        // DataGridViewへ表示する商品の一覧
+        private readonly BindingList<CarReport> _carreports = new();
+        // DB操作を担当するRepository
+        private readonly CarReportRepository _repository = new();
 
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
@@ -57,9 +65,9 @@ namespace CarReportSystem {
         //追加ボタンイベントハンドラ
         private void btAddRecord_Click(object sender, EventArgs e) {
 
-            tsslbMessage.Text = String.Empty; //メッセージ領域のクリア
+            tsslbMessage.Text = string.Empty; //メッセージ領域のクリア
                                               //if (String.IsNullOrWhiteSpace(cbAuthor.Text) || String.IsNullOrWhiteSpace(cbCarName.Text))
-            if (cbAuthor.Text == String.Empty || cbCarName.Text == String.Empty) {
+            if (cbAuthor.Text == string.Empty || cbCarName.Text == string.Empty) {
                 tsslbMessage.Text = "記録者、または社名が未入力です";
                 return;
             }
@@ -73,6 +81,18 @@ namespace CarReportSystem {
                 Picture = pbPicture.Image,
             };
             listCarReports.Add(carReport);
+
+
+            try {
+                _repository.Add(carReport);
+                ReloadCarReports();
+                ClearInput();
+
+                tsslbMessage.Text = "レポートを登録しました。";
+            }
+            catch (Exception ex) {
+                ShowError("登録エラー", ex);
+            }
 
             //入力履歴を登録
             SetCbAuthor(cbAuthor.Text);
@@ -109,10 +129,10 @@ namespace CarReportSystem {
         }
         private void InputItemsAllClear() {
             dtpDate.Value = DateTime.Today;
-            cbAuthor.Text = String.Empty;
+            cbAuthor.Text = string.Empty;
             rbOther.Checked = true;
-            cbCarName.Text = String.Empty;
-            tbReport.Text = String.Empty;
+            cbCarName.Text = string.Empty;
+            tbReport.Text = string.Empty;
             pbPicture.Image = null;
 
             dgvRecords.ClearSelection(); //セルの選択を解除する
@@ -187,8 +207,8 @@ namespace CarReportSystem {
                 return;
             }
 
-            if (String.IsNullOrWhiteSpace(cbAuthor.Text)
-                || String.IsNullOrWhiteSpace(cbCarName.Text)) {
+            if (string.IsNullOrWhiteSpace(cbAuthor.Text)
+                || string.IsNullOrWhiteSpace(cbCarName.Text)) {
                 tsslbMessage.Text = "記録者、または社名が未入力です";
             }
 
@@ -317,5 +337,30 @@ namespace CarReportSystem {
                 }
             }
         }
+
+        private void ReloadCarReports() {
+            _carreports.Clear();
+            foreach (var carReport in _repository.GetAll()) {
+                _carreports.Add(carReport);
+            }
+            dgvRecords.ClearSelection();
+        }
+        private void ClearInput() {
+            tbReport.Clear();
+
+
+
+        }
+
+        private void ShowError(string title, Exception ex) {
+            tsslbMessage.Text = title;
+            MessageBox.Show(
+                ex.Message,
+                title,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+        }
     }
+
 }
+
