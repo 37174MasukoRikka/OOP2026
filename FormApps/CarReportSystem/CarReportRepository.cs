@@ -28,7 +28,7 @@ namespace CarReportSystem {
                     Id = reader.GetInt32(0),
                     Date = DateTime.ParseExact(
                        reader.GetString(1),
-                       "yyyy-mm-dd",
+                       "yyyy-MM-dd",
                        CultureInfo.InvariantCulture),
                     Author = reader.GetString(2),
                     Maker = (CarReport.MakerGroup)reader.GetInt32(3),
@@ -86,12 +86,12 @@ namespace CarReportSystem {
 
             var pictureParameter = command.Parameters.Add("$picture", SqliteType.Blob);
 
-            if (pictureDate is null) {
+            if (pictureDate is not null) {
 
                 pictureParameter.Value = pictureDate;
+                
 
             } else {
-
                 pictureParameter.Value = DBNull.Value;
 
             }
