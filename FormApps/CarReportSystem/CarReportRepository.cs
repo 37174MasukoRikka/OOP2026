@@ -113,6 +113,8 @@ namespace CarReportSystem {
                 WHERE Id = $id;                               
                 """;
 
+            //SetCommandParameters;
+
             //更新件数が0なら対象が存在しない
             if (command.ExecuteNonQuery() == 0)
                 throw new InvalidOperationException("修正対象のレポートが見つかりませんでした。");
@@ -131,13 +133,15 @@ namespace CarReportSystem {
                 """;
 
             command.Parameters.AddWithValue("$id", id);
+            command.ExecuteNonQuery();
+        
 
             if (command.ExecuteNonQuery() == 0)
                 throw new InvalidOperationException("削除対象のレポートが見つかりませんでした。");
         }
 
 
-        // ImageをSQLiteへ保存できるbyte[]へ変換する
+            // ImageをSQLiteへ保存できるbyte[]へ変換する
         private static byte[]? ImageToBytes(Image? image) {
             if (image is null) return null;
 

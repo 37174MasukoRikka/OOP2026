@@ -24,6 +24,16 @@ namespace CarReportSystem {
         public Form1() {
             InitializeComponent();
             dgvRecords.DataSource = _carreports;
+
+            //ProductsクラスのプロパティからDataGridView列を自動生成する
+            dgvRecords.AutoGenerateColumns = true;
+            //DataGridViewの元データとしてBindingListを設定する
+            dgvRecords.DataSource = _carreports;
+            //起動直後にDBから商品一覧を読み込む
+            ReloadCarReports();
+
+            //使用中のDBファイルの場所をステータスバーへ表示する
+            tsslbMessage.Text = $"DB: {Database.FilePath}";
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -82,7 +92,6 @@ namespace CarReportSystem {
             };
             _carreports.Add(carReport);
 
-            //carReport.Id = 
             _repository.Add(carReport);
             ReloadCarReports();
 
@@ -192,8 +201,8 @@ namespace CarReportSystem {
                 return;
             }
 
-            _carreports.Remove(carReport);
-
+            _repository.Delete(carReport.Id);
+            ReloadCarReports();
             InputItemsUpdate();
         }
 
@@ -227,6 +236,8 @@ namespace CarReportSystem {
             _carreports[dgvRecords.CurrentRow.Index].CarName = cbCarName.Text.Trim();
             _carreports[dgvRecords.CurrentRow.Index].Report = tbReport.Text;
             _carreports[dgvRecords.CurrentRow.Index].Picture = pbPicture.Image;
+
+            _repository.Update(carReport);
 
             SetCbAuthor(cbAuthor.Text.Trim());
             SetCbAuthor(cbCarName.Text.Trim());
