@@ -5,16 +5,16 @@
 @*このViewがProduct型を受け取る宣言*@
 @model List<MvcBasicSample.Models.Product>
 @{
-    ViewData["Title"] = "送料判定";  //タブ用のタイトル
-    int total = 1200;
+    ViewData["Title"] = "商品一覧";  //タブ用のタイトル
+    string[] products = { "ノート", "ペン", "消しゴム",};
 }
 
-<h1>送料判定</h1> @*画面内の見出し*@
-<p>合計 : @total 円</p>
-
-@if (total >= 1000) {
-    <p>送料無料</p>
-} else {
-    <p>送料がかかります</p>   
+<h1>商品一覧</h1> @*画面内の見出し*@
+<ul>
+@foreach (var product in products) 
+{
+    <li>@product</li>
 }
+</ul>
+
 
