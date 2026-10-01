@@ -14,7 +14,7 @@
     @*一覧から商品を１件ずつ取り出す*@
     @foreach (var product in Model) {
         <li>@product.Name @product.Price 円</li>
-        sum += @product.Price;
+        sum += product.Price;
     }    
 </ul>
 <p>合計金額 @sum 円</p>
