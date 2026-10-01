@@ -5,16 +5,28 @@
 @*このViewがProduct型を受け取る宣言*@
 @model List<MvcBasicSample.Models.Product>
 @{
-    ViewData["Title"] = "商品一覧";  //タブ用のタイトル
-    string[] products = { "ノート", "ペン", "消しゴム",};
+    ViewData["Title"] = "商品一覧と合計";  //タブ用のタイトル
+    var products = new[]
+    {
+        new { Name = "ノート", Price = 250 },
+        new { Name = "ペン", Price = 150 },
+        new { Name = "消しゴム", Price = 100 }       
+    };
+
+    int total = 0;
+    foreach(var product in products)
+    {
+        total += product.Price;
+    }
 }
 
 <h1>商品一覧</h1> @*画面内の見出し*@
 <ul>
 @foreach (var product in products) 
 {
-    <li>@product</li>
+    <li>@product.Name : @product.Price 円</li>
 }
 </ul>
+<p>合計：@total 円</p>
 
 
