@@ -6,16 +6,11 @@
 @model List<MvcBasicSample.Models.Product>
 @{
     ViewData["Title"] = "商品情報";  //タブ用のタイトル
-    var sum = 0;
+    string productName = "ノート";
+    int price = 250;
 }
 
-<h1>商品一覧</h1> @*画面内の見出し*@
-<ul>
-    @*一覧から商品を１件ずつ取り出す*@
-    @foreach (var product in Model) {
-        <li>@product.Name @product.Price 円</li>
-        sum += product.Price;
-    }    
-</ul>
-<p>合計金額 @sum 円</p>
+<h1>商品情報</h1> @*画面内の見出し*@
+<p>商品名：@productName</p>
+<p>価格： @price 円</p>
 
