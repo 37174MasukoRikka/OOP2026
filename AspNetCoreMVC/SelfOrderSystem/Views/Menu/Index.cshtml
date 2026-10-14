@@ -24,6 +24,13 @@
         </a>
     }
 </div>
+
+@* 商品一覧より上へ追加する：CartControllerから渡されたエラーがあれば表示する *@ 
+@if (TempData["Error"] is string errorMessage) {
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+
 <div class="row g-3">
     @foreach (var product in Model.Products) {
         <div class="col-12 col-md-6 col-xl-4">
@@ -32,11 +39,30 @@
                     <h2 class="h5">@product.Name</h2>
                     <p class="text-muted flex-grow-1">@product.Description</p>
                     <p class="fs-5 fw-bold">@product.Price.ToString("N0") 円</p>
-                    @if (product.IsSoldOut) {
-                        <span class="badge text-bg-secondary">売り切れ</span>
-                    }
+
+                    <form asp-controller="Cart" asp-action="Add" method="post">
+                        <input type="hidden" name="productId" value="@product.Id" />
+
+                        @if (product.IsSoldOut) {
+                            <button class="btn btn-secondary w-100" disabled>
+                                売り切れ
+                            </button>
+                        } else {
+                            <button class="btn btn-primary w-100" type="submit">
+                                カートに追加
+                            </button>
+                        }
+                    </form>
                 </div>
             </div>
         </div>
     }
 </div>
+
+@* カートに商品があるときだけ合計数量・合計金額・リンクを表示する *@ 
+@if (Model.CartItemCount > 0) {
+    <div class="alert alert-dark mt-3 d-flex justify-content-between align-items-center">
+        <span>@Model.CartItemCount 点 / @Model.CartTotal.ToString("N0") 円</span>
+        <a class="btn btn-light" asp-controller="Cart" asp-action="Index">カートを見る</a>
+    </div>
+}
