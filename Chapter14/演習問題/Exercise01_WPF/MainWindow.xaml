@@ -7,19 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+
         </Grid.RowDefinitions>
-
-        <Button Grid.Row="0"
-                Content="ファイル選択"
-                Click="Button_Click"/>
-
-        <TextBox Grid.Row="1"
-                 x:Name="TextArea"
-                 TextWrapping="Wrap"
-                 AcceptsReturn="True"
-                 VerticalScrollBarVisibility="Auto"/>
+        <Button Grid.Row="0" Grid.Column="0" Content="ファイル選択" Click="Button_Click"/>
+        <TextBox Grid.ColumnSpan="2" x:Name="TextArea" TextWrapping="Wrap" Height="410" VerticalScrollBarVisibility="Auto" Margin="0,5,0,-53" Grid.Row="1" HorizontalAlignment="Left" Width="800"/>
     </Grid>
 </Window>
