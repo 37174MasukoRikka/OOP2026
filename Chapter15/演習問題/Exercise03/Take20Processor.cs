@@ -10,16 +10,14 @@ public class Take20Processor : ITextFileService {
 
     public void Initialize(string fname) => _count = 0;
 
-    public void Execute(string line) {
-
+    public bool Execute(string line) {
+        Console.WriteLine(line);
         _count++;
-        if (_count <= 20) {
-            Console.WriteLine(line);
-        }
+
+        return _count < 20;
     }
 
     public void Terminate() {
-
     }
 }
 
