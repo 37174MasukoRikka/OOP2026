@@ -44,6 +44,13 @@
         </div>
     }
 
+    @if (Model.Any()) {
+        <a class="btn btn-success btn-lg w-100"
+           asp-controller="Orders" asp-action="Checkout">
+            注文内容を確認する
+        </a>
+    }
+
     <div class="text-end fs-4 fw-bold my-3">
         合計 @total.ToString("N0") 円
     </div>

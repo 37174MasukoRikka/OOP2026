@@ -1,0 +1,16 @@
+﻿@using SelfOrderSystem.Models
+@model SelfOrderSystem.Models.Order
+@{
+    ViewData["Title"] = "注文状況";
+}
+<h1 class="h3">注文 #@Model.Id</h1>
+<p>テーブル @Model.TableNumber</p>
+<div class="alert alert-dark fs-4 fw-bold">
+    現在：@Model.Status.ToJapanese()
+</div>
+@foreach (var item in Model.Items) {
+    <div class="d-flex justify-content-between border-bottom py-2">
+        <span>@item.Product?.Name × @item.Quantity</span>
+        <span>@item.LineTotal.ToString("N0") 円</span>
+    </div>
+}

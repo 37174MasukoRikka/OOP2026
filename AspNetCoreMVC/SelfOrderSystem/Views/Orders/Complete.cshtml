@@ -1,0 +1,11 @@
+﻿@model SelfOrderSystem.Models.Order
+@{
+    ViewData["Title"] = "注文完了";
+}
+<div class="text-center py-4">
+    <h1 class="h3">ご注文ありがとうございます</h1>
+    <p class="display-6">注文番号 #@Model.Id</p>
+    <p>テーブル @Model.TableNumber</p>
+    <a class="btn btn-primary" asp-action="Status"
+       asp-route-id="@Model.PublicId">注文状況を確認する</a>
+</div> 

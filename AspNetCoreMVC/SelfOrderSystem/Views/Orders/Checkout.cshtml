@@ -1,0 +1,36 @@
+﻿@model SelfOrderSystem.ViewModels.CheckoutViewModel
+@{
+    ViewData["Title"] = "注文確認";
+}
+
+<h1 class="h3">注文内容の確認</h1>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+@foreach (var item in Model.Items) {
+    <div class="d-flex justify-content-between border-bottom py-2">
+        <span>@item.ProductName × @item.Quantity</span>
+        <span>@item.LineTotal.ToString("N0") 円</span>
+    </div>
+}
+<div class="text-end fs-4 fw-bold my-3">
+    合計 @Model.Total.ToString("N0") 円
+</div>
+
+<form asp-action="Place" method="post">
+    <div class="mb-3">
+        <label asp-for="TableNumber" class="form-label"></label>
+        <input asp-for="TableNumber" class="form-control" />
+        <span asp-validation-for="TableNumber" class="text-danger"></span>
+    </div>
+    <button class="btn btn-success btn-lg w-100" type="submit">
+        注文を確定する
+    </button>
+</form>
+
+<a asp-controller="Cart" asp-action="Index"
+   class="btn btn-outline-secondary mt-3">カートに戻る</a>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
