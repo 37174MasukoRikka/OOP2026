@@ -1,22 +1,112 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+/* AIデザイン演習用の追加スタイル */
+:root {
+    --aoba-blue: #5d7ca6;
+    --deep-blue: #334766;
+    --night-black: #131419;
+    --frame-gold: #9e8b61;
+    --ivory: #e7e2d6;
+}
+
+/* 全体 */
+body {
+    background-color: var(--night-black);
+    background-image: radial-gradient(circle at top, rgba(93,124,166,0.15), transparent 50%);
+    color: var(--ivory);
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+
+/* タイトル */
+h1, h2, h3 {
+    color: var(--frame-gold);
+    letter-spacing: 4px;
+    font-weight: normal;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+/* カード */
+.card {
+    background-color: rgba(24, 26, 32, 0.95);
+    border: 1px solid var(--frame-gold);
+    border-radius: 0;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(158,139,97,0.1);
+}
+
+/* ボタン */
+.btn-success,
+.btn-primary {
+    background-color: var(--deep-blue);
+    border-color: var(--frame-gold);
+    color: var(--ivory);
+}
+
+    .btn-success:hover,
+    .btn-primary:hover {
+        background-color: var(--aoba-blue);
+        border-color: var(--frame-gold);
+    }
+
+/* 入力フォーム */
+.form-control {
+    background-color: #1c1e25;
+    border: 1px solid #4b4b4b;
+    color: var(--ivory);
+}
+
+    .form-control:focus {
+        background-color: #22252c;
+        color: white;
+        border-color: var(--frame-gold);
+        box-shadow: 0 0 5px rgba(158,139,97,0.5);
+    }
+
+/* テーブル */
+.table {
+    color: var(--ivory);
+}
+
+    .table th {
+        background-color: rgba(51,71,102,0.5);
+        color: var(--frame-gold);
+    }
+
+    .table td {
+        border-color: rgba(158,139,97,0.15);
+    }
+
+/* ナビバー */
+.navbar {
+    background-color: #15171d !important;
+    border-bottom: 1px solid var(--frame-gold);
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--ivory) !important;
+}
+
+    .nav-link:hover {
+        color: var(--aoba-blue) !important;
+    }
