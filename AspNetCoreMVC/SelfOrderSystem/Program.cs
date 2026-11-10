@@ -27,6 +27,7 @@ builder.Services.AddSession(options =>     // Session機能を登録
 builder.Services.AddHttpContextAccessor();   // Controller以外のクラスからHttpContextを取得できるようにする
 builder.Services.AddScoped<CartService>();   // CartServiceをDIへ登録しControllerで受け取れるようにする
 
+builder.Services.AddScoped<IOrderService, OrderService>(); //サービス層を作成したことによる追加
 
 var app = builder.Build();
 
