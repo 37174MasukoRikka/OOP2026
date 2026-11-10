@@ -36,4 +36,142 @@ body {
     justify-content: center;
     color: #666;
     font-size: 0.95rem;
-} 
+}
+/* =========================================
+   Antique Luxury Theme
+========================================= */
+
+:root {
+    --gold: #b89b5e;
+    --gold-light: #d6c08a;
+    --brown: #3b2c24;
+    --dark-brown: #1f1713;
+    --ivory: #f5f1e8;
+    --cream: #ebe4d5;
+}
+
+/* ---------- 全体 ---------- */
+
+body {
+    background: linear-gradient( 180deg, #2d221b 0%, #1f1713 100% );
+    color: var(--ivory);
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+
+/* ---------- タイトル ---------- */
+
+h1 {
+    color: var(--gold-light);
+    text-align: center;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(214,192,138,0.35), 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* ---------- カテゴリ見出し ---------- */
+
+h2 {
+    display: inline-block;
+    padding: 12px 35px;
+    margin-bottom: 25px;
+    color: var(--cream);
+    font-weight: normal;
+    letter-spacing: 3px;
+    background: linear-gradient( 135deg, #574232, #3b2c24 );
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 0 4px rgba(184,155,94,0.2), 0 6px 15px rgba(0,0,0,0.4), inset 0 0 10px rgba(214,192,138,0.15);
+}
+
+
+/* ---------- カード ---------- */
+
+.card {
+    background: rgba(50, 38, 30, 0.95);
+    border: 1px solid var(--gold);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4), inset 0 0 15px rgba(214,192,138,0.05);
+    border-radius: 8px;
+}
+
+/* ---------- ボタン ---------- */
+
+.btn-primary,
+.btn-success {
+    background: linear-gradient( 180deg, #c4a969, #9b7c3d );
+    border: 1px solid var(--gold);
+    color: #fff;
+    font-weight: 600;
+}
+
+    .btn-primary:hover,
+    .btn-success:hover {
+        background: linear-gradient( 180deg, #d6c08a, #b89b5e );
+        border-color: var(--gold-light);
+    }
+
+/* ---------- 入力フォーム ---------- */
+
+.form-control {
+    background-color: #f9f7f2;
+    border: 1px solid #cdbfa6;
+    color: #2c2c2c;
+}
+
+    .form-control:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 8px rgba(184,155,94,0.35);
+        background-color: white;
+    }
+
+/* ---------- テーブル ---------- */
+
+.table {
+    color: var(--ivory);
+}
+
+    .table th {
+        background-color: #4d392d;
+        color: var(--gold-light);
+        border-color: rgba(184,155,94,0.4);
+    }
+
+    .table td {
+        border-color: rgba(184,155,94,0.2);
+    }
+
+/* ---------- ナビバー ---------- */
+
+.navbar {
+    background: #241b16 !important;
+    border-bottom: 2px solid var(--gold);
+}
+
+.navbar-brand {
+    color: var(--gold-light) !important;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    color: var(--ivory) !important;
+    font-weight: 600;
+}
+
+    .nav-link:hover {
+        color: var(--gold-light) !important;
+    }
+
+/* ---------- リンク ---------- */
+
+a {
+    color: var(--gold-light);
+}
+
+    a:hover {
+        color: #f6db9a;
+    }
+
+/* ---------- 区切り線 ---------- */
+
+hr {
+    border-color: rgba(184,155,94,0.3);
+}
