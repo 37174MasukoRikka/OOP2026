@@ -1,0 +1,49 @@
+﻿@using SelfOrderSystem.Models
+@model List<Order>
+
+@{
+    ViewData["Title"] = "店舗 注文一覧";
+}
+
+<h1 class="h3">店舗 注文一覧</h1>
+<p>注文日時の新しい順に最大50件を表示します</p>
+
+@* 注文が0件なら案内だけを表示 *@ 
+@if (Model.Count == 0) {
+    <div class="alert alert-info">まだ注文はありません</div>
+} else {
+    @* 幅の狭い画面では表を横スクロール *@ 
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead>
+                <tr>
+                    <th>注文ID</th>
+                    <th>注文日時</th>
+                    <th>卓番</th>
+                    <th>商品と数量</th>
+                    <th>合計</th>
+                    <th>状態</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* 外側の繰り返しは注文を1件ずつ表示 *@ 
+                    @foreach (var order in Model) {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.OrderedAtUtc.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</td>
+                        <td>@order.TableNumber</td>
+                        <td>
+                            @* 内側の繰り返しは各注文の商品を表示 *@ 
+                                        @foreach (var item in order.Items) {
+                                <div>@item.Product?.Name × @item.Quantity</div>
+                            }
+                        </td>
+                        @* 注文した時点の単価で合計を計算 *@ 
+                                    <td>@order.Items.Sum(i => i.UnitPrice * i.Quantity).ToString("N0") 円</td>
+                        <td>@order.Status.ToJapanese()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
