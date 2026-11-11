@@ -175,3 +175,14 @@ a {
 hr {
     border-color: rgba(184,155,94,0.3);
 }
+
+/* Staff画面のテーブル見出し */
+.table th {
+    color: #ffffff !important;
+    background-color: #6b4f2c !important;
+}
+
+/* テーブル内の文字 */
+.table td {
+    color: #3b2c24 !important;
+}
