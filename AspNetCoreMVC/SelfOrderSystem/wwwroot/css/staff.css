@@ -1,0 +1,286 @@
+﻿
+/* スタッフ画面全体 */
+.staff-page {
+    padding: 20px 0 50px;
+    color: #18283e;
+}
+
+/* ページの見出し */
+.staff-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.staff-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 0 8px;
+    color: #18283e;
+    border: none;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    text-align: left;
+}
+
+.staff-header p {
+    margin: 0;
+    color: #64748b;
+}
+
+.staff-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #64748b;
+    margin-bottom: 6px !important;
+}
+
+.staff-header-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: #64748b;
+}
+
+/* 注文数の集計 */
+.staff-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.staff-summary-box {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 20px;
+}
+
+.staff-summary-box span {
+    display: block;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.staff-summary-box strong {
+    display: block;
+    color: #18283e;
+    font-size: 1.8rem;
+}
+
+/* 注文カード一覧 */
+.staff-order-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 18px;
+}
+
+/* 注文1件のカード */
+.staff-order-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(20, 30, 50, 0.06);
+    min-width: 0;
+}
+
+/* カード上部 */
+.staff-order-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.staff-order-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.staff-table-number {
+    background: #18283e;
+    color: #fff;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.staff-order-id {
+    font-weight: 700;
+}
+
+.staff-order-time {
+    display: block;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* 注文状態 */
+.staff-status {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 5px 11px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.staff-status-new {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.staff-status-cooking {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.staff-status-served {
+    background: #dcfce7;
+    color: #166534;
+}
+
+/* 注文した商品 */
+.staff-order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 0;
+    min-height: 90px;
+}
+
+.staff-order-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: #334155;
+}
+
+.staff-order-item strong {
+    white-space: nowrap;
+}
+
+/* カード下部 */
+.staff-order-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.staff-total span {
+    display: block;
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.staff-total strong {
+    color: #18283e;
+    font-size: 1.4rem;
+}
+
+/* 状態変更ボタン */
+.staff-action-button {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 16px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.staff-action-button:hover {
+    background: #1d4ed8;
+    color: #fff;
+}
+
+.staff-action-button:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+/* 提供済み */
+.staff-completed {
+    color: #15803d;
+    font-weight: 700;
+}
+
+/* 注文なし */
+.staff-empty {
+    background: #fff;
+    text-align: center;
+    padding: 60px 20px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+}
+
+.staff-empty h2 {
+    font-size: 1.3rem;
+}
+
+/* タブレット以下は1列表示 */
+@media (max-width: 900px) {
+    .staff-order-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+    .staff-page {
+        padding-top: 10px;
+    }
+
+    .staff-header-label {
+        display: none;
+    }
+
+    .staff-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .staff-summary {
+        gap: 7px;
+    }
+
+    .staff-summary-box {
+        padding: 10px;
+    }
+
+    .staff-summary-box strong {
+        font-size: 1.35rem;
+    }
+
+    .staff-order-card {
+        padding: 15px;
+    }
+
+    .staff-order-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .staff-action-button {
+        width: 100%;
+    }
+
+    .staff-order-bottom form {
+        width: 100%;
+    }
+}
+
