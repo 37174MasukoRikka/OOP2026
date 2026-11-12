@@ -11,7 +11,7 @@
     int servedCount = Model.Count(o => o.Status == OrderStatus.Served);
 }
 
-<link rel="stylesheet" href="~/css/staff.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/staff.css" asp-append-version="true" />
 
 <div class="staff-page">
 
@@ -22,11 +22,15 @@
             <h1>店舗 注文管理</h1>
             <p>新しい注文から最大50件を表示しています</p>
         </div>
-        <span class="staff-header-label">ORDER MANAGEMENT</span>
+
+        <span class="staff-header-label">
+            ORDER MANAGEMENT
+        </span>
     </div>
 
     @* 注文数の集計 *@
     <div class="staff-summary">
+
         <div class="staff-summary-box">
             <span>表示件数</span>
             <strong>@Model.Count</strong>
@@ -41,6 +45,7 @@
             <span>提供済み</span>
             <strong>@servedCount</strong>
         </div>
+
     </div>
 
     @if (Model.Count == 0) {
@@ -55,7 +60,8 @@
             @foreach (var order in Model) {
                 // 注文全体の合計金額
                 var total = order.Items.Sum(
-                i => i.UnitPrice * i.Quantity);
+                i => i.UnitPrice * i.Quantity
+                );
 
                 <article class="staff-order-card">
 
@@ -63,6 +69,7 @@
                     <div class="staff-order-top">
 
                         <div class="staff-order-identity">
+
                             <span class="staff-table-number">
                                 卓 @order.TableNumber
                             </span>
@@ -73,22 +80,24 @@
                                 </div>
 
                                 <time class="staff-order-time">
-                                    @order.OrderedAtUtc.ToLocalTime()
+                                    @order.OrderedAtUtc
+                                    .ToLocalTime()
                                     .ToString("yyyy/MM/dd HH:mm")
                                 </time>
                             </div>
+
                         </div>
 
                         @* 現在の注文状態 *@
-                        <span class="staff-status
-                                                    @(order.Status == OrderStatus.Served
-                                                                                                                          ? "staff-status-served"
-                                                                                                                          : order.Status == OrderStatus.Cooking
-                                                                                                                              ? "staff-status-cooking"
-                                                                                                                              : "staff-status-new")">
+                <span class="staff-status @(order.Status == OrderStatus.Served ? "staff-status-served"
+                                                                               : order.Status == OrderStatus.Cooking
+                                                                               ? "staff-status-cooking"
+                                                                               : "staff-status-new")">
+                                                                                            
                     @order.Status.ToJapanese()
                 </span>
-            </div>
+
+                    </div>
 
                     @* 商品一覧 *@
                     <div class="staff-order-items">
@@ -118,7 +127,7 @@
                         </div>
 
                         @if (order.Status != OrderStatus.Served) {
-                            @* 既存の状態変更処理を呼び出す *@
+                            @* 既存の状態変更処理 *@
                             <form asp-controller="Staff"
                                   asp-action="Advance"
                                   method="post">
@@ -129,15 +138,16 @@
 
                                 <button type="submit"
                                         class="btn staff-action-button">
-                                    @order.Status.NextActionLabel()
-                                    →
+                                    @order.Status.NextActionLabel() →
                                 </button>
+
                             </form>
                         } else {
                             <span class="staff-completed">
                                 完了
                             </span>
                         }
+
                     </div>
 
                 </article>
@@ -145,4 +155,32 @@
 
         </div>
     }
+
 </div>
+
+@section Scripts
+{
+    @* LibManで追加したSignalR *@
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+
+    <script>
+        // Hubとの接続を作る
+        const staffConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/staffOrdersHub")
+            .withAutomaticReconnect()
+            .build();
+
+        // 通知を受けたら最新の注文一覧を読み直す
+        staffConnection.on("OrdersChanged", () => {
+            window.location.reload();
+        });
+
+        // 再接続後も表示を更新
+        staffConnection.onreconnected(() =>
+            window.location.reload());
+
+        staffConnection.start().catch(error => {
+            console.error("店舗 SignalR 接続エラー", error);
+        });
+    </script>
+}
