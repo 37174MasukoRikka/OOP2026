@@ -14,3 +14,31 @@
         <span>@item.LineTotal.ToString("N0") 円</span>
     </div>
 }
+
+@section Scripts { 
+    @* SignalRのブラウザ用ライブラリ *@ 
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script> 
+    <script> 
+        const orderConnection = new signalR.HubConnectionBuilder() 
+                                    .withUrl("/staffOrdersHub") 
+                                    .withAutomaticReconnect() 
+                                    .build(); 
+  
+        // 現在表示している注文のグループに参加する 
+        const publicId = "@Model.PublicId"; 
+        const joinOrder = () => 
+            orderConnection.invoke("JoinOrder", publicId); 
+            // 店員による状態変更を受けたら再読込する 
+            orderConnection.on("OrderStatusChanged", () => { 
+            window.location.reload(); 
+        }); 
+  
+        // 切断から復旧したらグループへ入り直す 
+        orderConnection.onreconnected(async () => { 
+            await joinOrder(); 
+               window.location.reload(); 
+            }); 
+        orderConnection.start() .then(joinOrder) 
+                       .catch(error => console.error("注文状況接続エラー", error)); 
+    </script> 
+} 
