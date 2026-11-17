@@ -15,6 +15,15 @@
     </div>
 }
 
+@* 注文状況画面の操作ボタン *@
+<div class="d-flex flex-wrap gap-2 mt-4">
+    <a asp-controller="Menu" asp-action="Index"
+       class="btn btn-outline-primary">メニューに戻る</a>
+    <a asp-controller="Orders" asp-action="Status"
+       asp-route-id="@Model.PublicId"
+       class="btn btn-primary">最新状況を確認</a>
+</div>
+
 @section Scripts { 
     @* SignalRのブラウザ用ライブラリ *@ 
     <script src="~/js/signalr/dist/browser/signalr.min.js"></script> 
