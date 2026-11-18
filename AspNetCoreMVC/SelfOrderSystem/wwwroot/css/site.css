@@ -42,152 +42,188 @@ body {
 ========================================= */
 
 :root {
-    --gold: #6b4f2c;
-    --gold-light: #4a3728;
-    --brown: #3b2c24;
-    --dark-brown: #1f1713;
-    --ivory: #f5f1e8;
-    --cream: #ebe4d5;
+    --main-blue: #5f7fa6;
+    --hover-blue: #486789;
+    --light-blue: #dfe8f2;
+    --bg-top: #eef3f8;
+    --bg-bottom: #dfe8f2;
+    --text: #2f3542;
+    --card: #ffffff;
+    --border: #dbe4ef;
 }
 
 /* ---------- 全体 ---------- */
 
 body {
-    background: linear-gradient( 180deg, #faf8f3 0%, #f2eee5 100% );
-    color: #3b2c24;
-    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    background: linear-gradient( 180deg, var(--bg-top) 0%, var(--bg-bottom) 100% );
+    color: var(--text);
+    font-family: "Yu Gothic UI", "Hiragino Sans", sans-serif;
 }
 
 /* ---------- タイトル ---------- */
 
 h1 {
-    color: var(--gold-light);
+    color: var(--main-blue);
     text-align: center;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
     margin-bottom: 30px;
-    text-shadow: 0 0 10px rgba(214,192,138,0.35), 2px 2px 4px rgba(0,0,0,0.5);
+    font-weight: 700;
+    text-shadow: none;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
 }
 
-/* ---------- カテゴリ見出し ---------- */
+/* ---------- カテゴリ ---------- */
 
 h2 {
     display: block;
-    padding: 0;
     margin-bottom: 20px;
-    color: #4a3728;
+    padding: 0;
     background: none;
     border: none;
     box-shadow: none;
+    color: var(--main-blue);
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
 }
 
-
-/* ---------- カード ---------- */
+/* ---------- 商品カード ---------- */
 
 .card {
-    background: rgba(255, 252, 247, 0.95);
-    border: 1px solid var(--gold);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1), inset 0 0 15px rgba(214,192,138,0.08);
-    border-radius: 8px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(95,127,166,.12);
+    overflow: hidden;
+    transition: .2s;
+}
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 24px rgba(95,127,166,.18);
+    }
+
+/* ---------- 商品写真 ---------- */
+
+.so-product-photo {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background: #f1f5f9;
+}
+
+.so-product-photo--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+}
+
+/* ---------- 商品名 ---------- */
+
+.card-title {
+    color: #334155;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* ---------- 商品説明 ---------- */
+
+.card-text {
+    color: #64748b;
 }
 
 /* ---------- ボタン ---------- */
 
 .btn-primary,
 .btn-success {
-    background: linear-gradient( 180deg, #c4a969, #9b7c3d );
-    border: 1px solid var(--gold);
-    color: #fff;
+    background: var(--main-blue);
+    border: none;
+    color: white;
     font-weight: 600;
+    border-radius: 999px;
 }
 
     .btn-primary:hover,
     .btn-success:hover {
-        background: linear-gradient( 180deg, #d6c08a, #b89b5e );
-        border-color: var(--gold-light);
+        background: var(--hover-blue);
+        color: white;
     }
 
 /* ---------- 入力フォーム ---------- */
 
 .form-control {
-    background-color: #f9f7f2;
-    border: 1px solid #cdbfa6;
-    color: #2c2c2c;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
 }
 
     .form-control:focus {
-        border-color: var(--gold);
-        box-shadow: 0 0 8px rgba(184,155,94,0.35);
-        background-color: white;
+        border-color: var(--main-blue);
+        box-shadow: 0 0 0 3px rgba(95,127,166,.15);
     }
+
+/* ---------- カート ---------- */
+
+.so-cart-sidebar {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 8px 20px rgba(95,127,166,.12);
+}
 
 /* ---------- テーブル ---------- */
 
-.table {
-    color: #3b2c24;
+.table th {
+    background: #eef5ff !important;
+    color: var(--main-blue) !important;
 }
 
-    .table th {
-        background-color: #4d392d;
-        color: var(--gold-light);
-        border-color: rgba(184,155,94,0.4);
-    }
-
-    .table td {
-        border-color: rgba(184,155,94,0.2);
-    }
+.table td {
+    color: var(--text) !important;
+}
 
 /* ---------- ナビバー ---------- */
 
 .navbar {
-    background: #4a372a !important;
-    border-bottom: 2px solid var(--gold);
+    background: white !important;
+    border-bottom: 1px solid var(--border);
 }
 
 .navbar-brand {
-    color: var(--gold-light) !important;
-    font-weight: bold;
+    color: var(--main-blue) !important;
+    font-weight: 700;
     letter-spacing: 2px;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
 }
 
 .nav-link {
-    color: var(--ivory) !important;
-    font-weight: 600;
+    color: var(--text) !important;
 }
 
     .nav-link:hover {
-        color: var(--gold-light) !important;
+        color: var(--main-blue) !important;
     }
 
 /* ---------- リンク ---------- */
 
 a {
-    color: var(--gold-light);
+    color: var(--main-blue);
 }
 
     a:hover {
-        color: #f6db9a;
+        color: var(--hover-blue);
     }
 
 /* ---------- 区切り線 ---------- */
 
 hr {
-    border-color: rgba(184,155,94,0.3);
+    border-color: var(--border);
 }
 
-/* Staff画面のテーブル見出し */
-.table th {
-    color: #ffffff !important;
-    background-color: #6b4f2c !important;
-}
+/* ---------- PCではカート固定 ---------- */
 
-/* テーブル内の文字 */
-.table td {
-    color: #3b2c24 !important;
-}
-
-/*PCではカートをスクロールに追従させる*/
 @media (min-width: 992px) {
     .so-cart-sidebar {
         position: sticky;
