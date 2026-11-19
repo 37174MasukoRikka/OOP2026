@@ -1,0 +1,29 @@
+﻿@model SelfOrderSystem.ViewModels.StaffLoginViewModel
+@{
+    ViewData["Title"] = "スタッフログイン";
+}
+
+<h1 class="h3 mb-3">スタッフログイン</h1>
+<p>店舗の注文管理はスタッフ専用です</p>
+
+<form asp-controller="Account" asp-action="Login" method="post">
+    @* 認証前に開こうとしたページのURLを保持 *@ 
+    <input asp-for="ReturnUrl" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="UserName" class="form-label">ユーザー名</label>
+        <input asp-for="UserName" class="form-control"
+               autocomplete="username" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">パスワード</label>
+        <input asp-for="Password" class="form-control"
+               autocomplete="current-password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">ログイン</button>
+</form> 

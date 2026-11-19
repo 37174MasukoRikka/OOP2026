@@ -38,6 +38,14 @@
                                 <a class="nav-link " asp-controller="Orders" asp-action="MyOrder">ご注文状況</a>
                             </li>                            
                         }
+                        @* ログイン済みの場合のみログアウトを表示 *@
+                        @if (User.Identity?.IsAuthenticated == true) {
+                            <form asp-controller="Account" asp-action="Logout" method="post">
+                                <button type="submit" class="btn btn-outline-secondary">
+                                    ログアウト
+                                </button>
+                            </form>
+                        }
                     </ul>
                 </div>
             </div>

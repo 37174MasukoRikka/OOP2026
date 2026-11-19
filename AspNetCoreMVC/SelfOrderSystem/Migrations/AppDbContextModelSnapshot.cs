@@ -140,6 +140,34 @@ namespace SelfOrderSystem.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("SelfOrderSystem.Models.StaffUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
+
+                    b.ToTable("StaffUsers");
+                });
+
             modelBuilder.Entity("SelfOrderSystem.Models.OrderItem", b =>
                 {
                     b.HasOne("SelfOrderSystem.Models.Order", "Order")

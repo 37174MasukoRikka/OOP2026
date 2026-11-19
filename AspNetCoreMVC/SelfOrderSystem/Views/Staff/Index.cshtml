@@ -89,11 +89,11 @@
                         </div>
 
                         @* 現在の注文状態 *@
-                <span class="staff-status @(order.Status == OrderStatus.Served ? "staff-status-served"
-                                                                               : order.Status == OrderStatus.Cooking
-                                                                               ? "staff-status-cooking"
-                                                                               : "staff-status-new")">
-                                                                                            
+                        <span class="staff-status @(order.Status == OrderStatus.Served ? "staff-status-served"
+                                                                                                             : order.Status == OrderStatus.Cooking
+                                                                                                             ? "staff-status-cooking"
+                                                                                                             : "staff-status-new")">
+
                     @order.Status.ToJapanese()
                 </span>
 
@@ -176,11 +176,12 @@
         });
 
         // 再接続後も表示を更新
-        staffConnection.onreconnected(() =>
-            window.location.reload());
+        staffConnection.onreconnected(async () => {
+            await staffConnection.invoke("JoinStaff");
+            window.location.reload();
 
-        staffConnection.start().catch(error => {
-            console.error("店舗 SignalR 接続エラー", error);
-        });
+        staffConnection.start()
+             .then(() => staffConnection.invoke("JoinStaff"))
+             .catch(error => console.error("店舗 SignalR 接続エラー", error));
     </script>
 }

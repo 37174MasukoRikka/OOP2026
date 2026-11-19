@@ -13,5 +13,12 @@ public class StaffOrdersHub : Hub {
         await Groups.AddToGroupAsync(
         Context.ConnectionId, $"order-{id:N}");
     }
+
+    // スタッフ権限のある接続だけ専用グループへ参加 
+    public async Task JoinStaff() {
+        if (Context.User?.IsInRole("Staff") != true)
+            throw new HubException("スタッフ認証が必要です");
+        await Groups.AddToGroupAsync(Context.ConnectionId, "staff");
+    }
 }
 
