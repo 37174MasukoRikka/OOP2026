@@ -22,18 +22,20 @@ namespace WeatherApp {
             StringBuilder sb = new();
 
             sb.AppendLine(
-                $"現在気温 : {weather.Temperature} ℃");
+                GetWeatherIcon(weather.WeatherCode));
 
             sb.AppendLine(
-                $"湿度 : {weather.Humidity} %");
+                $"{weather.Temperature}℃");
 
             sb.AppendLine(
-                $"風速 : {weather.WindSpeed} m/s");
+                GetWeatherText(weather.WeatherCode));
 
             sb.AppendLine(
-                $"天気 : {GetWeatherText(weather.WeatherCode)}");
+                $"💧{weather.Humidity}%  🌬{weather.WindSpeed}m/s");
 
             CurrentWeatherText.Text = sb.ToString();
+
+            ChangeBackgroundColor(weather.WeatherCode);
 
             ForecastList.Items.Clear();
 
@@ -42,14 +44,14 @@ namespace WeatherApp {
                     DateTime.Parse(day.Date);
 
                 string formattedDate =
-                    date.ToString("M/d(ddd)", new CultureInfo("ja-JP"));
+                    date.ToString(
+                        "M/d(ddd)",
+                        new CultureInfo("ja-JP"));
 
                 ForecastList.Items.Add(
                     $"{formattedDate}  " +
-                    $"{GetWeatherText(day.WeatherCode)}  " +
-                    $"最高:{day.MaxTemperature}℃  " +
-                    $"最低:{day.MinTemperature}℃  " +
-                    $"降水確率:{day.PrecipitationProbability}%");
+                    $"{GetWeatherIcon(day.WeatherCode)}  " +
+                    $"{day.MaxTemperature}° / {day.MinTemperature}°");
             }
         }
 
@@ -57,6 +59,7 @@ namespace WeatherApp {
             return code switch {
                 0 => "快晴",
                 1 => "晴れ",
+
                 2 => "一部曇り",
                 3 => "曇り",
 
@@ -79,6 +82,45 @@ namespace WeatherApp {
 
                 _ => "不明"
             };
+        }
+
+        private string GetWeatherIcon(int code) {
+            return code switch {
+                0 => "☀",
+                1 => "☀",
+
+                2 => "⛅",
+                3 => "☁",
+
+                61 => "☂",
+                63 => "☂",
+                65 => "☂",
+
+                71 => "❄",
+                73 => "❄",
+                75 => "❄",
+
+                _ => "🌤"
+            };
+        }
+
+        private void ChangeBackgroundColor(int weatherCode) {
+            if (weatherCode == 0 || weatherCode == 1) {
+                MainGrid.Background =
+                    System.Windows.Media.Brushes.LightSkyBlue;
+
+                Title = "☀ 天気予報アプリ";
+            } else if (weatherCode == 2 || weatherCode == 3) {
+                MainGrid.Background =
+                    System.Windows.Media.Brushes.LightGray;
+
+                Title = "☁ 天気予報アプリ";
+            } else {
+                MainGrid.Background =
+                    System.Windows.Media.Brushes.LightSteelBlue;
+
+                Title = "☂ 天気予報アプリ";
+            }
         }
     }
 }

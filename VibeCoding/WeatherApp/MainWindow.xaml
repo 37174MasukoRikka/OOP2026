@@ -5,25 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeatherApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <StackPanel Margin="20">
+        Height="600"
+        Width="800">
 
-            <TextBlock
-            Text="東京の天気予報"
-            FontSize="28"
-            FontWeight="Bold"
-            Margin="0,0,0,20"/>
+    <Grid x:Name="MainGrid">
 
-            <TextBlock
-            x:Name="CurrentWeatherText"
-            FontSize="16"
-            Margin="0,0,0,20"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
 
-            <ListBox
-            x:Name="ForecastList"
-            Height="250"/>
+        <!-- 現在の天気 -->
+        <Border Grid.Row="0"
+                Margin="15"
+                Padding="20"
+                CornerRadius="15"
+                Background="White">
 
-        </StackPanel>
+            <StackPanel>
+
+                <TextBlock
+                    Text="東京"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"/>
+
+                <TextBlock
+                    x:Name="CurrentWeatherText"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    TextAlignment="Center"
+                    Margin="0,10"/> 
+
+            </StackPanel>
+
+        </Border>
+
+        <!-- 7日間予報 -->
+        <Border Grid.Row="1"
+                Margin="15"
+                Padding="15"
+                CornerRadius="15"
+                Background="White">
+
+            <StackPanel>
+
+                <TextBlock
+                    Text="7日間予報"
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Margin="0,0,0,10"/>
+
+                <ListBox
+                    x:Name="ForecastList"
+                    FontSize="18"
+                    BorderThickness="0"
+                    Background="Transparent"/>
+
+            </StackPanel>
+
+        </Border>
+
     </Grid>
+
 </Window>
